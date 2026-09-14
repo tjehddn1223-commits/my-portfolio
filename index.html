@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fbfbfa" />
+    <title>Portfolio</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Outfit:wght@400;500;600;700&display=swap");
+      :root { --paper:#fbfbfa; --ink:#111; --muted:#999; --faint:#cfcfcd; }
+      * { box-sizing:border-box; }
+      html, body { margin:0; min-height:100%; background:var(--paper); }
+      body { color:var(--ink); font-family:"Outfit", "Noto Sans KR", sans-serif; }
+      .resume { display:grid; grid-template-columns:1.3fr 1.35fr; column-gap:clamp(2.5rem,6vw,6rem); min-height:100svh; padding:clamp(2rem,4.4vw,4.5rem) clamp(2rem,4vw,4.2rem) 2.4rem; }
+      .personal { display:flex; flex-direction:column; }
+      .label { margin:0 0 1.7rem; color:var(--muted); font-size:clamp(.72rem,.9vw,.94rem); font-weight:600; }
+      .name { margin:0 0 .8rem; font-family:"Noto Sans KR",sans-serif; font-size:clamp(2.6rem,4vw,4.65rem); font-weight:800; letter-spacing:-.12em; line-height:1; }
+      .tagline { margin:0 0 clamp(2.5rem,5vw,4.9rem); color:#555; font-size:clamp(.68rem,.78vw,.84rem); font-weight:500; letter-spacing:-.05em; line-height:1.45; white-space:nowrap; }
+      .facts { display:grid; grid-template-columns:4.5rem minmax(0,1fr); row-gap:.62rem; margin:0; font-size:clamp(.68rem,.75vw,.82rem); line-height:1.35; }
+      .facts dt { color:#373737; }.facts dd { margin:0; font-weight:500; letter-spacing:-.04em; white-space:nowrap; }
+      .contact-slot { display:inline-block; width:min(100%,10rem); padding:.08rem .3rem; color:white; background:#202020; }
+      .projects { padding-top:clamp(6rem,17vh,10rem); }.section { margin:clamp(2.3rem,5.5vh,4.6rem) 0 0; }.section-title { margin:0 0 1rem; font-size:clamp(.69rem,.75vw,.8rem); font-weight:500; }
+      .timeline { display:grid; grid-template-columns:4.5rem 1fr; gap:.47rem 1.1rem; margin:0; font-size:clamp(.65rem,.7vw,.76rem); line-height:1.25; }.timeline dt { color:#5c5c5b; }.timeline dd { margin:0; font-weight:500; letter-spacing:-.04em; }
+      .tool-list { display:grid; gap:.8rem; }.tool { display:grid; grid-template-columns:1.5rem minmax(4rem,1fr) 2rem; gap:.55rem; align-items:center; font-size:clamp(.64rem,.72vw,.77rem); }.tool-mark { display:grid; width:1.45rem; height:1.45rem; place-items:center; color:#fff; background:#171717; border-radius:50%; font-size:.55rem; font-weight:700; }.meter { height:.38rem; overflow:hidden; background:#e8e8e7; border-radius:1rem; }.meter i { display:block; width:64%; height:100%; background:#050505; border-radius:inherit; }.tool:nth-child(2) .meter i { width:72%; }.tool:nth-child(3) .meter i { width:80%; }
+      .project-list { display:grid; gap:clamp(1.7rem,3.4vh,2.9rem); }.project { padding-bottom:.1rem; }.project-link { display:block; color:inherit; text-decoration:none; transition:transform .18s ease; }.project-link:hover { transform:translateX(.3rem); }.project-link:focus-visible { outline:2px solid #111; outline-offset:.35rem; }.project-top { display:flex; align-items:baseline; justify-content:space-between; gap:1rem; margin-bottom:.48rem; }.project h3 { margin:0; font-family:"Noto Sans KR",sans-serif; font-size:clamp(.85rem,1vw,1.06rem); font-weight:700; letter-spacing:-.07em; }.project h3::after { margin-left:.5rem; content:"↗"; font-family:"Outfit",sans-serif; font-size:.8em; font-weight:400; }.project time { color:var(--faint); font-size:clamp(.65rem,.72vw,.76rem); white-space:nowrap; }.project p { margin:0; color:#888; font-size:clamp(.72rem,.82vw,.88rem); letter-spacing:-.05em; line-height:1.52; }.placeholder { color:#adadab !important; }
+      @media (max-width:850px) { .resume { grid-template-columns:1fr 1fr; gap:2.5rem 3.5rem; } }
+      @media (max-width:560px) { .resume { display:block; padding:2rem 1.5rem; }.personal,.details,.projects { padding:0; }.details,.projects { margin-top:4rem; }.social { margin-top:3rem; } }
+      @media print { @page { size:landscape; margin:0; }.resume { min-height:100vh; } }
+    </style>
+  </head>
+  <body>
+    <main class="resume" aria-label="포트폴리오 표지">
+      <section class="personal" aria-labelledby="name">
+        <p class="label">Resume</p><h1 id="name" class="name">서동우</h1><p class="tagline">빠르게 학습하고, 복잡한 것을 구조화하며, 변화에 자연스럽게 멜트인합니다.</p>
+        <dl class="facts">
+          <dt>Birth</dt><dd>1998.09.17</dd><dt>Experience</dt><dd class="placeholder">—</dd><dt>Education</dt><dd>공주대학교 기계자동차공학부 자동차공학전공</dd><dt>Active</dt><dd>- KDT 빅데이터 기반 품질 관리(QA,QC) 양성 과정<br>- HD 현대중공업 Future builder academy<br>- HD 선박 전기설비 운용 교육</dd><dt>Contact</dt><dd><span class="contact-slot">- tjehddn1223@gmail.com</span><br>- 010-5339-7039</dd>
+        </dl>
+        <section class="section" aria-label="도구 역량"><h2 class="section-title">TOOLS</h2><div class="tool-list"><div class="tool"><span class="tool-mark">A</span><span class="meter"><i></i></span><span class="placeholder">—</span></div><div class="tool"><span class="tool-mark">P</span><span class="meter"><i></i></span><span class="placeholder">—</span></div><div class="tool"><span class="tool-mark">F</span><span class="meter"><i></i></span><span class="placeholder">—</span></div></div></section>
+      </section>
+      <section class="projects" aria-label="프로젝트 개요">
+        <h2 class="section-title">PROJECTS</h2><div class="project-list">
+          <article class="project"><a class="project-link" href="project.html?id=radar"><div class="project-top"><h3>LG이노텍 레이더 센서 품질 예측</h3></div><p>레이더 센서 데이터를 분석해 성능 저하 가능성을 사전에 예측하고,<br>품질 개선 방향을 도출한 프로젝트입니다.</p></a></article>
+          <article class="project"><a class="project-link" href="project.html?id=engine"><div class="project-top"><h3>엔진 결함 원인 분석</h3></div><p>엔진 품질 데이터를 탐색·시각화하여 공정 변수와 결함 발생의 관계를 분석하고,<br>주요 관리 요인을 정리했습니다.</p></a></article>
+          <article class="project"><a class="project-link" href="project.html?id=wafer"><div class="project-top"><h3>반도체 웨이퍼 결함 분석</h3></div><p>온도·압력·노광 시간·장비 로그·교대조 데이터를 바탕으로,<br>웨이퍼 결함 유형과 결함 수에 영향을 주는 요인을 분석했습니다.</p></a></article>
+          <article class="project"><a class="project-link" href="project.html?id=coating"><div class="project-top"><h3>선박 도장 불량 예측</h3></div><p>선박 도장 이미지 데이터를 정리·분석해 도장 상태와 불량 유형을 구분하고,<br>품질 검수에 활용할 예측 기준을 탐색했습니다.</p></a></article>
+          <article class="project"><a class="project-link" href="project.html?id=ev"><div class="project-top"><h3>전기차 주행거리 및 배터리 성능 예측</h3></div><p>주행 속도와 배터리 전압·전류·온도·SoC 센서 데이터를 분석해,<br>주행 가능 거리와 배터리 전력 상태를 예측했습니다.</p></a></article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

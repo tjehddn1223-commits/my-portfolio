@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Detail</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Outfit:wght@400;500;600;700&display=swap");
+      :root { --paper:#fbfbfa; --ink:#111; --soft:#ececea; --muted:#747470; --accent:#111; }
+      * { box-sizing:border-box; } html { background:#e8e8e5; } body { margin:0; background:var(--paper); color:var(--ink); font-family:"Outfit","Noto Sans KR",sans-serif; }
+      .detail { max-width:1600px; min-height:100svh; margin:auto; padding:clamp(.9rem,2.2vw,2.25rem); }
+      .back { display:inline-flex; align-items:center; gap:.5rem; color:var(--ink); font-size:.78rem; font-weight:600; text-decoration:none; }.back:hover { text-decoration:underline; }
+      .page { min-height:calc(100svh - 4.5rem); padding:clamp(1.5rem,3vw,3.25rem) 0 1rem; border-bottom:1px solid var(--soft); }
+      .page:last-child { border:0; }.eyebrow { margin:0 0 .8rem; color:#999; font-size:.75rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; }
+      h1 { max-width:13ch; margin:0 0 1rem; font-family:"Noto Sans KR",sans-serif; font-size:clamp(2.5rem,5vw,5.4rem); font-weight:800; letter-spacing:-.1em; line-height:1.02; word-break:keep-all; }
+      .summary { max-width:48rem; margin:0; font-size:clamp(1rem,1.45vw,1.5rem); font-weight:500; letter-spacing:-.055em; line-height:1.65; word-break:keep-all; }
+      .meta { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; margin-top:clamp(1.5rem,3vw,3rem); background:var(--soft); }.meta div { min-height:6rem; padding:1rem; background:var(--paper); }.meta dt { margin-bottom:.55rem; color:#999; font-size:.68rem; font-weight:600; letter-spacing:.07em; text-transform:uppercase; }.meta dd { margin:0; font-size:clamp(.82rem,1vw,1rem); font-weight:500; letter-spacing:-.05em; line-height:1.55; word-break:keep-all; }
+      .section-grid { display:grid; grid-template-columns:minmax(9rem,.65fr) minmax(0,1.8fr); gap:clamp(1.5rem,4vw,5rem); padding:clamp(1.15rem,2vw,2rem) 0; border-top:1px solid var(--soft); }.section-grid:first-of-type { margin-top:clamp(1.75rem,3vw,3rem); }.section-grid h2 { margin:0; font-size:.8rem; font-weight:600; letter-spacing:.06em; }.section-grid p { max-width:50rem; margin:0; color:#444; font-size:clamp(.92rem,1.1vw,1.1rem); letter-spacing:-.055em; line-height:1.8; word-break:keep-all; }
+      .contribution { padding:1.4rem 1.5rem; border-left:3px solid var(--ink); background:#f3f3f1; }.contribution strong { display:block; margin-bottom:.5rem; font-size:.72rem; letter-spacing:.06em; }.contribution p { font-size:.9rem; line-height:1.75; }
+      .flow { display:grid; grid-template-columns:repeat(4,1fr); gap:.7rem; }.flow div { position:relative; min-height:5.75rem; padding:.75rem; border:1px solid var(--soft); }.flow div:not(:last-child)::after { position:absolute; top:50%; right:-.6rem; z-index:1; color:#999; content:"→"; }.flow b { display:block; margin-bottom:.35rem; font-size:.73rem; }.flow span { color:var(--muted); font-size:.7rem; letter-spacing:-.04em; line-height:1.45; }
+      .outcome { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }.outcome div { padding:1.4rem; background:#151515; color:white; }.outcome b { display:block; margin-bottom:.6rem; color:#aaa; font-size:.68rem; letter-spacing:.07em; }.outcome p { color:white; font-size:.92rem; line-height:1.65; }
+      .process-content { display:grid; gap:1rem; }.figure-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.55rem; }.figure-card { min-width:0; margin:0; padding:.5rem; border:1px solid var(--soft); background:#f7f7f5; }.figure-card img { display:block; width:100%; height:7.2rem; object-fit:contain; background:#fff; }.figure-card figcaption { margin-top:.45rem; color:#666; font-size:.66rem; letter-spacing:-.04em; line-height:1.45; word-break:keep-all; }.process-frame { display:flex; flex-direction:column; justify-content:center; min-height:7.2rem; padding:.8rem; background:#151515; color:white; }.process-frame b { margin-bottom:.4rem; color:#ddd; font-size:.68rem; }.process-frame span { color:#aaa; font-size:.64rem; line-height:1.45; }.note { display:none; }
+      @media (max-width:720px) { .page { min-height:auto; }.meta,.outcome { grid-template-columns:1fr; }.section-grid { grid-template-columns:1fr; gap:1rem; }.flow { grid-template-columns:1fr 1fr; }.flow div:not(:last-child)::after { display:none; } }
+      @media print { @page { size:A4 landscape; margin:0; } html,body { background:var(--paper); }.detail { max-width:none; padding:1.1cm 1.5cm; }.back { display:none; }.page { min-height:calc(100vh - 2.2cm); padding:.45cm 0; break-after:page; }.page:last-child { break-after:auto; }.eyebrow { margin-bottom:.6rem; }h1 { margin-bottom:.7rem; font-size:3.1rem; }.summary { font-size:.9rem; line-height:1.55; }.meta { margin-top:1rem; }.meta div { min-height:3.7rem; padding:.7rem; }.meta dt { margin-bottom:.35rem; }.section-grid { gap:2rem; padding:.6rem 0; }.section-grid:first-of-type { margin-top:1rem; }.section-grid p { font-size:.78rem; line-height:1.55; }.contribution { padding:.7rem .9rem; }.contribution p { font-size:.75rem; }.flow div { min-height:4.1rem; padding:.55rem; }.flow span { font-size:.61rem; }.process-content { gap:.55rem; }.figure-gallery { gap:.35rem; }.figure-card { padding:.3rem; }.figure-card img { height:3.8rem; }.figure-card figcaption { margin-top:.25rem; font-size:.56rem; line-height:1.3; }.process-frame { min-height:3.8rem; padding:.45rem; }.process-frame span { font-size:.56rem; }.outcome { gap:.55rem; }.outcome div { padding:.75rem; }.outcome p { font-size:.72rem; line-height:1.45; } }
+    </style>
+  </head>
+  <body>
+    <main class="detail">
+      <a class="back" href="index.html">← Portfolio</a>
+      <section class="page" id="overview">
+        <p class="eyebrow">Project / 01</p>
+        <h1 id="title"></h1>
+        <p id="summary" class="summary"></p>
+        <dl class="meta"><div><dt>기간</dt><dd id="period"></dd></div><div><dt>활용 도구</dt><dd id="tools"></dd></div><div><dt>프로젝트 형태</dt><dd>팀 프로젝트</dd></div></dl>
+        <div class="section-grid"><h2>BACKGROUND</h2><p id="background"></p></div>
+        <div class="section-grid"><h2>PERSONAL CONTRIBUTION</h2><div class="contribution"><strong>개인 기여도</strong><p id="contribution"></p></div></div>
+      </section>
+      <section class="page" id="process">
+        <p class="eyebrow">Project / 02</p>
+        <div class="section-grid"><h2>PROCESS</h2><div class="process-content"><div class="flow" id="flow"></div><div class="figure-gallery" id="figures"></div></div></div>
+        <div class="section-grid"><h2>WHY THIS PROCESS</h2><p id="why"></p></div>
+        <div class="section-grid"><h2>OUTCOME</h2><div class="outcome" id="outcome"></div></div>
+        <p class="note">외부 이미지는 사용하지 않았습니다. 상세 페이지의 시각 자료는 추후 원하실 때 결과보고서에서 발췌한 자료만 추가할 수 있습니다.</p>
+      </section>
+    </main>
+    <script>
+      const projects = {
+        radar: {
+          title: "LG이노텍 레이더 센서 품질 예측",
+          summary: "자율주행 레이더 센서 데이터를 바탕으로 성능 저하 가능성을 예측하고, 품질 개선 방향을 찾은 프로젝트입니다.",
+          period: "결과보고서에 활동 기간이 명시되지 않음",
+          tools: "데이터 분석 · 예측 모델링 · 시각화",
+          background: "레이더는 차량 주변의 물체와 거리를 파악하는 핵심 센서입니다. 센서 성능의 이상 징후를 사전에 파악해 품질 문제를 줄이고자, 센서 데이터를 기반으로 성능 저하 여부를 예측하는 분석 과제를 설정했습니다.",
+          contribution: "결과보고서에서 개인별 담당 업무를 명확히 확인할 수 없어, 역할을 임의로 기재하지 않았습니다. 담당 범위를 알려주시면 이 항목을 실제 기여 내용으로 교체할 수 있습니다.",
+          flow: [["문제 정의","성능 저하를 조기에 예측할 필요성 설정"],["데이터 이해","레이더 센서의 작동 원리와 변수 검토"],["분석·모델링","성능 저하 예측 및 주요 요인 탐색"],["개선안 도출","분석 결과를 품질 관리 관점으로 정리"]],
+          why: "센서 품질 문제는 발생 후 대응보다 사전 감지가 중요합니다. 따라서 도메인 이해를 먼저 확보한 뒤 데이터에서 이상 징후를 찾고, 예측 결과를 실제 품질 개선 방향으로 연결하는 순서로 진행했습니다.",
+          outcome: [["배운 점","센서 도메인 지식과 데이터 분석을 함께 해석해야 품질 개선에 활용 가능한 인사이트를 만들 수 있음을 학습했습니다."],["산출물","성능 저하 예측을 위한 분석 흐름과 품질 개선 방향을 제시했습니다."]]
+        },
+        engine: {
+          title: "엔진 결함 원인 분석",
+          summary: "엔진 품질 데이터를 탐색·시각화해 공정 변수와 결함 발생의 관계를 살펴보고, 관리가 필요한 요인을 정리한 프로젝트입니다.",
+          period: "결과보고서에 활동 기간이 명시되지 않음",
+          tools: "EDA · 데이터 전처리 · 시각화",
+          background: "엔진 품질 관리에서는 결함 발생 후의 판정보다 결함과 연관된 공정 조건을 빠르게 찾는 일이 중요합니다. 변수별 분포와 결함 여부를 비교해 결함 발생과 관련된 조건을 파악하는 것을 목표로 했습니다.",
+          contribution: "결과보고서에서 개인별 담당 업무를 명확히 확인할 수 없어, 역할을 임의로 기재하지 않았습니다. 담당 범위를 알려주시면 이 항목을 실제 기여 내용으로 교체할 수 있습니다.",
+          flow: [["문제 정의","엔진 결함과 품질 변수의 관계 설정"],["데이터 탐색","변수 분포와 이상치 확인"],["비교 분석","결함 여부별 변수 차이 시각화"],["관리 요인 정리","품질 관리에 필요한 관찰 지점 도출"]],
+          why: "결함 원인을 단일 변수로 단정하기 전에 데이터의 분포와 품질을 확인해야 합니다. 탐색적 분석을 통해 비교 기준을 만들고, 시각화로 관계를 검증하는 방식으로 문제를 구조화했습니다.",
+          outcome: [["배운 점","품질 데이터에서는 이상치·결측치·변수 분포를 먼저 점검하는 과정이 분석 결과의 신뢰도를 좌우함을 학습했습니다."],["산출물","결함 발생과 공정 변수의 관계를 확인하기 위한 탐색·시각화 분석 결과를 정리했습니다."]]
+        },
+        wafer: {
+          title: "반도체 웨이퍼 결함 분석",
+          summary: "공정 조건과 장비·교대조 데이터를 분석해 웨이퍼 결함 유형 및 결함 수에 영향을 주는 요인을 탐색한 프로젝트입니다.",
+          period: "2026.06.09 - 2026.06.13",
+          tools: "데이터 전처리 · EDA · 가설 검정 · 시각화",
+          background: "웨이퍼 공정에서는 온도·압력·노광 시간과 장비 상태, 작업 환경이 결함에 영향을 줄 수 있습니다. 공정 변수의 이상치와 제한된 결함 유형을 점검하고, 결함 수와의 관계를 가설 기반으로 분석했습니다.",
+          contribution: "데이터 분석, 결론 도출, 시각화를 담당했습니다. 공정 변수와 결함 간 관계를 가설에 맞춰 분석하고, 결과를 이해하기 쉬운 시각 자료와 결론으로 정리했습니다.",
+          flow: [["가설 설정","공정 조건·장비 로그·교대조의 영향 가정"],["전처리","온도·압력 이상치와 장비 로그 유효 범위 점검"],["시각화 분석","변수 관계와 결함 분포 비교"],["결론 도출","핵심 요인 및 개선 방향 정리"]],
+          why: "분석 전 온도 500도 수준의 이상치와 압력 극단값, 장비 로그의 유효 범위를 확인했습니다. 데이터 품질을 먼저 점검한 뒤 가설별 시각화로 관계를 비교해야 결론을 과장하지 않을 수 있기 때문입니다.",
+          outcome: [["정량 확인","온도·압력 이상치와 장비 로그의 사용 범위를 식별하고, 결함 분석에 필요한 데이터 슬라이싱 기준을 마련했습니다."],["배운 점","제조 데이터는 분석 기법 이전에 데이터의 발생 맥락과 품질을 검증해야 한다는 점을 학습했습니다."]]
+        },
+        coating: {
+          title: "선박 도장 불량 예측",
+          summary: "선박 도장 이미지 데이터를 정리·분석해 도장 상태와 불량 유형을 구분하고, 품질 검수에 활용할 기준을 탐색한 프로젝트입니다.",
+          period: "2026.09.09 결과보고서 기준",
+          tools: "이미지 데이터 전처리 · 분류 분석",
+          background: "선박 도장 품질은 외관뿐 아니라 부식 방지와 유지보수 비용에도 영향을 줍니다. 사람이 이미지를 확인하는 검사 과정을 보조할 수 있도록 도장 불량 유형을 데이터로 구분하는 문제를 설정했습니다.",
+          contribution: "결과보고서에서 개인별 담당 업무를 명확히 확인할 수 없어, 역할을 임의로 기재하지 않았습니다. 담당 범위를 알려주시면 이 항목을 실제 기여 내용으로 교체할 수 있습니다.",
+          flow: [["데이터 구성","정상·불량 도장 이미지 수집 및 분류"],["전처리","이미지 라벨·품질·분포 점검"],["유형 분석","도장 상태와 불량 유형 구분"],["검수 기준 탐색","현장 적용을 위한 판단 기준 정리"]],
+          why: "이미지 기반 품질 검수에서는 각 유형의 데이터 수가 치우치지 않는지가 중요합니다. 보고서의 정상 이미지 400장과 유형별 이미지 데이터를 기반으로 분포를 먼저 정리한 뒤, 상태 구분 기준을 탐색했습니다.",
+          outcome: [["정량 확인","총 1,200장의 도장 이미지 데이터셋을 기준으로 분석을 진행했습니다."],["배운 점","이미지 분류 과제는 데이터 라벨의 일관성과 클래스별 수량 균형이 결과 해석의 출발점임을 학습했습니다."]]
+        },
+        ev: {
+          title: "전기차 주행거리 및 배터리 성능 예측",
+          summary: "주행·배터리 센서 데이터를 분석해 주행 가능 거리와 배터리 전력 상태를 예측하고, 상태를 확인하는 대시보드 형태로 구성한 프로젝트입니다.",
+          period: "결과보고서에 활동 기간이 명시되지 않음",
+          tools: "Pandas · NumPy · Streamlit · Plotly · Altair",
+          background: "전기차의 주행 가능 거리는 속도와 배터리 전압·전류·온도·SoC 등 여러 조건에 따라 달라집니다. 센서 신호를 함께 해석해 주행거리 예측과 배터리 상태 확인에 활용하는 것을 목표로 했습니다.",
+          contribution: "결과보고서에서 개인별 담당 업무를 명확히 확인할 수 없어, 역할을 임의로 기재하지 않았습니다. 다만 함께 보관된 애플리케이션 소스에는 센서 컬럼 매핑, 전력·주행거리 계산, 상태 대시보드 구현 내용이 포함되어 있습니다.",
+          flow: [["데이터 점검","속도·SoC·전압·전류·온도 신호 확인"],["전처리","이상 범위 및 충·방전 상태 분리"],["예측 분석","주행거리·배터리 전력 상태 계산"],["대시보드","주행·충전·회생 상태 시각화"]],
+          why: "주행거리와 배터리 상태는 하나의 센서만으로 설명하기 어렵습니다. 따라서 핵심 신호를 함께 정리하고, 전압과 전류로 전력을 계산한 뒤 상태 변화가 보이도록 대시보드로 연결했습니다.",
+          outcome: [["산출물","주행 상태, 배터리 SoC·온도·전력, 회생 제동 에너지 등을 확인할 수 있는 인터랙티브 대시보드 구조를 구현했습니다."],["배운 점","예측값만 제시하는 것보다 사용자가 판단에 필요한 센서 흐름을 함께 볼 수 있게 만드는 것이 중요함을 학습했습니다."]]
+        }
+      };
+      const figures = {
+        radar: [
+          { src: "assets/radar-01.jpg", alt: "레이더 신호 그래픽", caption: "보고서 내 레이더 신호 시각 자료" },
+          { label: "문제 정의", text: "센서 성능 저하를 조기에 파악하는 분석 목표 설정" },
+          { label: "데이터 이해", text: "레이더 센서의 측정값과 변화 특성 점검" },
+          { label: "개선 방향", text: "예측 결과를 품질 관리 관점으로 정리" }
+        ],
+        engine: [
+          { src: "assets/engine-01.jpg", alt: "엔진 작동 원리 그림", caption: "엔진 작동 구조 및 사이클" },
+          { src: "assets/engine-02.jpg", alt: "엔진 이미지", caption: "분석 대상 엔진 구성" },
+          { src: "assets/engine-03.jpg", alt: "엔진 속도에 따른 토크와 출력 그래프", caption: "엔진 속도별 토크·출력 성능 곡선" },
+          { src: "assets/engine-04.jpg", alt: "엔진 관련 보고서 시각 자료", caption: "보고서 내 엔진 성능 분석 자료" }
+        ],
+        wafer: [
+          { src: "assets/wafer-01.jpg", alt: "날짜별 결함률 관리도", caption: "날짜별 결함률 관리도" },
+          { src: "assets/wafer-02.jpg", alt: "공정별 결함 수와 변수의 상관관계 히트맵", caption: "공정별 변수–결함 수 상관관계" },
+          { src: "assets/wafer-03.jpg", alt: "시간대별 결함 발생 비율 그래프", caption: "시간대별 결함 발생 비율" },
+          { src: "assets/wafer-04.jpg", alt: "웨이퍼 결함 분석 시각 자료", caption: "보고서 내 공정·결함 비교 자료" }
+        ],
+        coating: [
+          { src: "assets/coating-small-01.jpg", alt: "도장 표면 불량 예시", caption: "도장 표면 불량 사례" },
+          { src: "assets/coating-small-03.jpg", alt: "도막 벌어짐 불량 예시 이미지", caption: "도막 벌어짐 불량 유형" },
+          { src: "assets/coating-small-04.jpg", alt: "스크래치 불량 예시 이미지", caption: "스크래치 불량 유형" },
+          { src: "assets/coating-small-05.jpg", alt: "도장 표면 스크래치 이미지", caption: "도장 표면 결함 사례" }
+        ],
+        ev: [
+          { src: "assets/ev-01.jpg", alt: "전기차 주행 및 배터리 상태 대시보드", caption: "주행 상태와 예상 주행거리" },
+          { src: "assets/ev-02.jpg", alt: "전기차 배터리 상태 대시보드", caption: "배터리 SoC·전력 상태 확인" },
+          { src: "assets/ev-03.jpg", alt: "전기차 주행 데이터 대시보드", caption: "센서값 기반 주행 상태 화면" },
+          { label: "신호 통합", text: "속도·SoC·전압·전류·온도를 함께 해석해 상태를 표시" }
+        ]
+      };
+      const id = new URLSearchParams(location.search).get("id") || "radar";
+      const p = projects[id] || projects.radar;
+      document.title = `${p.title} | Portfolio`;
+      for (const [key, value] of Object.entries(p)) { const el = document.getElementById(key); if (el && typeof value === "string") el.textContent = value; }
+      document.getElementById("flow").innerHTML = p.flow.map(([title, text], i) => `<div><b>0${i + 1} · ${title}</b><span>${text}</span></div>`).join("");
+      document.getElementById("outcome").innerHTML = p.outcome.map(([title, text]) => `<div><b>${title}</b><p>${text}</p></div>`).join("");
+    </script>
+    <script>
+      const projectFigures = figures[id] || figures.radar;
+      document.getElementById("figures").innerHTML = projectFigures.map((figure) => {
+        if (figure.src) return `<figure class="figure-card"><img src="${figure.src}" alt="${figure.alt}"><figcaption>${figure.caption}</figcaption></figure>`;
+        return `<div class="process-frame"><b>${figure.label}</b><span>${figure.text}</span></div>`;
+      }).join("");
+    </script>
+  </body>
+</html>
