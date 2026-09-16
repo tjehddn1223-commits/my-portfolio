@@ -3,149 +3,751 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fbfbfa" />
     <title>Project Detail</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Outfit:wght@400;500;600;700&display=swap");
-      :root { --paper:#fbfbfa; --ink:#111; --soft:#ececea; --muted:#747470; --accent:#111; }
-      * { box-sizing:border-box; } html { background:#e8e8e5; } body { margin:0; background:var(--paper); color:var(--ink); font-family:"Outfit","Noto Sans KR",sans-serif; }
-      .detail { max-width:1600px; min-height:100svh; margin:auto; padding:clamp(.9rem,2.2vw,2.25rem); }
-      .back { display:inline-flex; align-items:center; gap:.5rem; color:var(--ink); font-size:.78rem; font-weight:600; text-decoration:none; }.back:hover { text-decoration:underline; }
-      .page { min-height:calc(100svh - 4.5rem); padding:clamp(1.5rem,3vw,3.25rem) 0 1rem; border-bottom:1px solid var(--soft); }
-      .page:last-child { border:0; }.eyebrow { margin:0 0 .8rem; color:#999; font-size:.75rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; }
-      h1 { max-width:13ch; margin:0 0 1rem; font-family:"Noto Sans KR",sans-serif; font-size:clamp(2.5rem,5vw,5.4rem); font-weight:800; letter-spacing:-.1em; line-height:1.02; word-break:keep-all; }
-      .summary { max-width:48rem; margin:0; font-size:clamp(1rem,1.45vw,1.5rem); font-weight:500; letter-spacing:-.055em; line-height:1.65; word-break:keep-all; }
-      .meta { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; margin-top:clamp(1.5rem,3vw,3rem); background:var(--soft); }.meta div { min-height:6rem; padding:1rem; background:var(--paper); }.meta dt { margin-bottom:.55rem; color:#999; font-size:.68rem; font-weight:600; letter-spacing:.07em; text-transform:uppercase; }.meta dd { margin:0; font-size:clamp(.82rem,1vw,1rem); font-weight:500; letter-spacing:-.05em; line-height:1.55; word-break:keep-all; }
-      .section-grid { display:grid; grid-template-columns:minmax(9rem,.65fr) minmax(0,1.8fr); gap:clamp(1.5rem,4vw,5rem); padding:clamp(1.15rem,2vw,2rem) 0; border-top:1px solid var(--soft); }.section-grid:first-of-type { margin-top:clamp(1.75rem,3vw,3rem); }.section-grid h2 { margin:0; font-size:.8rem; font-weight:600; letter-spacing:.06em; }.section-grid p { max-width:50rem; margin:0; color:#444; font-size:clamp(.92rem,1.1vw,1.1rem); letter-spacing:-.055em; line-height:1.8; word-break:keep-all; }
-      .contribution { padding:1.4rem 1.5rem; border-left:3px solid var(--ink); background:#f3f3f1; }.contribution strong { display:block; margin-bottom:.5rem; font-size:.72rem; letter-spacing:.06em; }.contribution p { font-size:.9rem; line-height:1.75; }
-      .flow { display:grid; grid-template-columns:repeat(4,1fr); gap:.7rem; }.flow div { position:relative; min-height:5.75rem; padding:.75rem; border:1px solid var(--soft); }.flow div:not(:last-child)::after { position:absolute; top:50%; right:-.6rem; z-index:1; color:#999; content:"→"; }.flow b { display:block; margin-bottom:.35rem; font-size:.73rem; }.flow span { color:var(--muted); font-size:.7rem; letter-spacing:-.04em; line-height:1.45; }
-      .outcome { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }.outcome div { padding:1.4rem; background:#151515; color:white; }.outcome b { display:block; margin-bottom:.6rem; color:#aaa; font-size:.68rem; letter-spacing:.07em; }.outcome p { color:white; font-size:.92rem; line-height:1.65; }
-      .process-content { display:grid; gap:1rem; }.figure-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.55rem; }.figure-card { min-width:0; margin:0; padding:.5rem; border:1px solid var(--soft); background:#f7f7f5; }.figure-card img { display:block; width:100%; height:7.2rem; object-fit:contain; background:#fff; }.figure-card figcaption { margin-top:.45rem; color:#666; font-size:.66rem; letter-spacing:-.04em; line-height:1.45; word-break:keep-all; }.process-frame { display:flex; flex-direction:column; justify-content:center; min-height:7.2rem; padding:.8rem; background:#151515; color:white; }.process-frame b { margin-bottom:.4rem; color:#ddd; font-size:.68rem; }.process-frame span { color:#aaa; font-size:.64rem; line-height:1.45; }.note { display:none; }
-      @media (max-width:720px) { .page { min-height:auto; }.meta,.outcome { grid-template-columns:1fr; }.section-grid { grid-template-columns:1fr; gap:1rem; }.flow { grid-template-columns:1fr 1fr; }.flow div:not(:last-child)::after { display:none; } }
-      @media print { @page { size:A4 landscape; margin:0; } html,body { background:var(--paper); }.detail { max-width:none; padding:1.1cm 1.5cm; }.back { display:none; }.page { min-height:calc(100vh - 2.2cm); padding:.45cm 0; break-after:page; }.page:last-child { break-after:auto; }.eyebrow { margin-bottom:.6rem; }h1 { margin-bottom:.7rem; font-size:3.1rem; }.summary { font-size:.9rem; line-height:1.55; }.meta { margin-top:1rem; }.meta div { min-height:3.7rem; padding:.7rem; }.meta dt { margin-bottom:.35rem; }.section-grid { gap:2rem; padding:.6rem 0; }.section-grid:first-of-type { margin-top:1rem; }.section-grid p { font-size:.78rem; line-height:1.55; }.contribution { padding:.7rem .9rem; }.contribution p { font-size:.75rem; }.flow div { min-height:4.1rem; padding:.55rem; }.flow span { font-size:.61rem; }.process-content { gap:.55rem; }.figure-gallery { gap:.35rem; }.figure-card { padding:.3rem; }.figure-card img { height:3.8rem; }.figure-card figcaption { margin-top:.25rem; font-size:.56rem; line-height:1.3; }.process-frame { min-height:3.8rem; padding:.45rem; }.process-frame span { font-size:.56rem; }.outcome { gap:.55rem; }.outcome div { padding:.75rem; }.outcome p { font-size:.72rem; line-height:1.45; } }
+
+      :root {
+        --paper:#fbfbfa; --wash:#f2f2ef; --dark:#141413;
+        --ink:#111; --ink-2:#3c3c39; --ink-3:#6d6d68; --ink-4:#9b9b95;
+        --line:#e3e3df; --line-2:#cfcfc9;
+        --ff:"Outfit","Noto Sans KR",sans-serif;
+        --fk:"Noto Sans KR",sans-serif;
+      }
+      * { box-sizing:border-box; }
+      html { background:var(--paper); -webkit-text-size-adjust:100%; }
+      body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--ff); font-size:15px; line-height:1.68; }
+      a { color:inherit; }
+
+      /* ---------- top bar ---------- */
+      .bar { position:sticky; top:0; z-index:40; display:flex; align-items:center; gap:1rem; padding:.62rem clamp(1rem,4vw,3rem); background:rgba(251,251,250,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+      .bar a.home { display:inline-flex; align-items:center; gap:.38rem; font-size:.76rem; font-weight:600; text-decoration:none; letter-spacing:-.01em; }
+      .bar a.home:hover { text-decoration:underline; }
+      .bar .now { min-width:0; overflow:hidden; color:var(--ink-3); font-family:var(--fk); font-size:.74rem; font-weight:500; letter-spacing:-.04em; text-overflow:ellipsis; white-space:nowrap; }
+      .bar .dots { display:flex; gap:.3rem; margin-left:auto; }
+      .bar .dots a { width:1.55rem; height:1.55rem; display:grid; place-items:center; border:1px solid var(--line-2); border-radius:50%; color:var(--ink-3); font-size:.66rem; font-weight:600; text-decoration:none; }
+      .bar .dots a[aria-current="page"] { color:#fff; background:var(--dark); border-color:var(--dark); }
+
+      .wrap { max-width:1180px; margin:0 auto; padding:0 clamp(1rem,4vw,3rem) 3rem; }
+
+      /* ---------- hero ---------- */
+      .hero { padding:clamp(1.6rem,3.6vw,2.9rem) 0 0; }
+      .eyebrow { display:flex; flex-wrap:wrap; align-items:center; gap:.55rem; margin:0 0 .85rem; color:var(--ink-4); font-size:.68rem; font-weight:600; letter-spacing:.11em; text-transform:uppercase; }
+      .eyebrow span.tag { padding:.1rem .45rem; color:var(--ink-2); background:var(--wash); border:1px solid var(--line); border-radius:2px; letter-spacing:.06em; }
+      h1 { max-width:19ch; margin:0 0 .75rem; font-family:var(--fk); font-size:clamp(1.95rem,4.1vw,3.35rem); font-weight:800; letter-spacing:-.075em; line-height:1.08; word-break:keep-all; }
+      .lede { max-width:56ch; margin:0 0 clamp(1.3rem,2.6vw,1.9rem); color:var(--ink-2); font-family:var(--fk); font-size:clamp(.95rem,1.25vw,1.12rem); font-weight:500; letter-spacing:-.045em; line-height:1.72; word-break:keep-all; }
+
+      .meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:1px; margin:0; background:var(--line); border:1px solid var(--line); }
+      .meta > div { padding:.72rem .85rem; background:var(--paper); }
+      .meta dt { margin-bottom:.32rem; color:var(--ink-4); font-size:.63rem; font-weight:600; letter-spacing:.09em; text-transform:uppercase; }
+      .meta dd { margin:0; font-family:var(--fk); font-size:.79rem; font-weight:500; letter-spacing:-.045em; line-height:1.52; word-break:keep-all; }
+
+      /* ---------- stats ---------- */
+      .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1px; margin-top:1px; background:var(--line); border:1px solid var(--line); border-top:0; }
+      .stats > div { padding:.9rem .85rem 1rem; background:var(--wash); }
+      .stats b { display:block; font-size:clamp(1.25rem,2.1vw,1.6rem); font-weight:700; letter-spacing:-.045em; line-height:1.15; }
+      .stats .lbl { margin-top:.2rem; font-family:var(--fk); font-size:.75rem; font-weight:600; letter-spacing:-.04em; }
+      .stats .sub { margin-top:.35rem; color:var(--ink-3); font-family:var(--fk); font-size:.69rem; letter-spacing:-.04em; line-height:1.5; word-break:keep-all; }
+
+      /* ---------- section ---------- */
+      .sec { padding:clamp(1.5rem,2.9vw,2.3rem) 0 0; }
+      .sec-head { display:flex; align-items:baseline; gap:.65rem; padding-top:.85rem; margin-bottom:1.05rem; border-top:1px solid var(--line-2); }
+      .sec-head .num { font-size:.68rem; font-weight:600; color:var(--ink-4); letter-spacing:.06em; }
+      .sec-head h2 { margin:0; font-family:var(--fk); font-size:.93rem; font-weight:700; letter-spacing:-.05em; }
+      .sec-head .aside { margin-left:auto; color:var(--ink-4); font-family:var(--fk); font-size:.7rem; letter-spacing:-.04em; text-align:right; }
+
+      p { margin:0 0 .75rem; }
+      p:last-child { margin-bottom:0; }
+      .prose { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:.2rem 2.6rem; color:var(--ink-2); font-family:var(--fk); font-size:.86rem; letter-spacing:-.045em; line-height:1.78; word-break:keep-all; }
+
+      /* bullet blocks */
+      .points { display:grid; grid-template-columns:repeat(auto-fit,minmax(243px,1fr)); gap:.55rem; margin-top:1.05rem; list-style:none; padding:0; }
+      .points li { padding:.6rem .8rem; background:var(--wash); border-left:2px solid var(--ink); font-family:var(--fk); }
+      .points b { display:block; margin-bottom:.16rem; font-size:.79rem; font-weight:700; letter-spacing:-.05em; }
+      .points span { color:var(--ink-2); font-size:.76rem; letter-spacing:-.045em; line-height:1.62; word-break:keep-all; }
+
+      /* role */
+      .role { display:grid; grid-template-columns:minmax(0,.72fr) minmax(0,1.6fr); gap:0; border:1px solid var(--line-2); }
+      .role .who { padding:1rem; background:var(--dark); color:#fff; }
+      .role .who span { display:block; color:#9a9a93; font-size:.63rem; font-weight:600; letter-spacing:.09em; text-transform:uppercase; }
+      .role .who b { display:block; margin-top:.4rem; font-family:var(--fk); font-size:1rem; font-weight:700; letter-spacing:-.06em; line-height:1.4; word-break:keep-all; }
+      .role ul { margin:0; padding:.9rem 1rem .9rem 2rem; font-family:var(--fk); font-size:.82rem; letter-spacing:-.045em; line-height:1.72; color:var(--ink-2); word-break:keep-all; }
+      .role li + li { margin-top:.4rem; }
+      .role li::marker { color:var(--ink-4); }
+      .role.deep { grid-template-columns:minmax(0,.52fr) minmax(0,2.15fr); }
+      .role .role-body { padding:.9rem 1rem; }
+      .role .role-body ul { margin:0 0 .95rem; padding:0 0 0 1.15rem; }
+      .role .role-body ul:last-child { margin-bottom:0; }
+      .role-grp { margin:0 0 .4rem; color:var(--ink-4); font-size:.63rem; font-weight:600; letter-spacing:.085em; text-transform:uppercase; }
+
+      /* timeline */
+      .flow { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); }
+      .flow div { padding:.7rem .8rem .8rem; background:var(--paper); }
+      .flow .when { color:var(--ink-4); font-size:.66rem; font-weight:600; letter-spacing:.02em; }
+      .flow b { display:block; margin:.25rem 0 .28rem; font-family:var(--fk); font-size:.81rem; font-weight:700; letter-spacing:-.05em; }
+      .flow span { color:var(--ink-3); font-family:var(--fk); font-size:.71rem; letter-spacing:-.045em; line-height:1.55; word-break:keep-all; }
+
+      /* tables */
+      .tbl-wrap { overflow-x:auto; }
+      table { width:100%; border-collapse:collapse; font-family:var(--fk); font-size:.76rem; letter-spacing:-.04em; }
+      caption { margin-bottom:.45rem; color:var(--ink-3); font-size:.71rem; text-align:left; letter-spacing:-.04em; }
+      th, td { padding:.48rem .7rem; text-align:left; border-bottom:1px solid var(--line); vertical-align:top; word-break:keep-all; }
+      thead th { color:var(--ink-4); font-size:.65rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; border-bottom:1px solid var(--line-2); }
+      tbody th { font-weight:700; white-space:nowrap; }
+      tbody tr:last-child th, tbody tr:last-child td { border-bottom:0; }
+      td.num, th.num { font-family:var(--ff); font-variant-numeric:tabular-nums; }
+
+      /* figures */
+      .figs { display:grid; grid-template-columns:repeat(auto-fit,minmax(238px,1fr)); gap:.7rem; }
+      figure { min-width:0; margin:0; padding:.45rem; background:var(--wash); border:1px solid var(--line); }
+      figure a { display:block; }
+      figure img { display:block; width:100%; height:180px; object-fit:contain; background:#fff; border:1px solid var(--line); cursor:zoom-in; }
+      figcaption { margin-top:.45rem; padding:0 .12rem; color:var(--ink-2); font-family:var(--fk); font-size:.71rem; letter-spacing:-.045em; line-height:1.55; word-break:keep-all; }
+      figcaption em { display:block; margin-top:.2rem; color:var(--ink-4); font-size:.65rem; font-style:normal; }
+
+      /* findings */
+      .finds { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:.1rem 2.4rem; margin:0; padding:0; list-style:none; counter-reset:f; }
+      .finds li { display:grid; grid-template-columns:1.5rem minmax(0,1fr); gap:.1rem .6rem; padding:.68rem 0; border-top:1px solid var(--line); counter-increment:f; }
+      .finds li::before { content:counter(f,decimal-leading-zero); grid-row:span 2; color:var(--ink-4); font-size:.68rem; font-weight:600; padding-top:.2rem; }
+      .finds b { font-family:var(--fk); font-size:.8rem; font-weight:700; letter-spacing:-.05em; }
+      .finds span { color:var(--ink-2); font-family:var(--fk); font-size:.77rem; letter-spacing:-.045em; line-height:1.68; word-break:keep-all; }
+
+      /* outcome */
+      .out { display:grid; grid-template-columns:repeat(auto-fit,minmax(245px,1fr)); gap:.7rem; }
+      .out div { padding:.95rem 1rem 1.05rem; border:1px solid var(--line-2); }
+      .out div:first-child { background:var(--dark); color:#fff; border-color:var(--dark); }
+      .out div:first-child p { color:#dcdcd6; }
+      .out b { display:block; margin-bottom:.4rem; color:var(--ink-4); font-size:.63rem; font-weight:600; letter-spacing:.09em; text-transform:uppercase; }
+      .out div:first-child b { color:#8f8f88; }
+      .out p { color:var(--ink-2); font-family:var(--fk); font-size:.78rem; letter-spacing:-.045em; line-height:1.68; word-break:keep-all; }
+
+      /* pager */
+      .pager { display:grid; grid-template-columns:1fr 1fr; gap:1px; margin-top:2rem; background:var(--line); border:1px solid var(--line); }
+      .pager a { padding:.85rem 1rem; background:var(--paper); text-decoration:none; }
+      .pager a:hover { background:var(--wash); }
+      .pager a.next { text-align:right; }
+      .pager span { display:block; color:var(--ink-4); font-size:.64rem; font-weight:600; letter-spacing:.09em; text-transform:uppercase; }
+      .pager b { display:block; margin-top:.25rem; font-family:var(--fk); font-size:.85rem; font-weight:700; letter-spacing:-.06em; word-break:keep-all; }
+      .pager a.empty { pointer-events:none; opacity:.35; }
+
+      /* lightbox */
+      #lb { position:fixed; inset:0; z-index:90; display:none; place-items:center; padding:2.2rem; background:rgba(16,16,15,.93); cursor:zoom-out; }
+      #lb.on { display:grid; }
+      #lb img { max-width:100%; max-height:100%; object-fit:contain; background:#fff; }
+      #lb p { position:absolute; left:0; right:0; bottom:.75rem; margin:0; color:#d7d7d1; font-family:var(--fk); font-size:.74rem; letter-spacing:-.04em; text-align:center; }
+
+      @media (max-width:760px) {
+        .role { grid-template-columns:1fr; }
+        .finds li { grid-template-columns:1.35rem minmax(0,1fr); }
+        figure img { height:150px; }
+      }
+      @media (max-width:520px) { .bar .now { display:none; } }
+
+      @media print {
+        @page { size:A4; margin:12mm; }
+        html, body { background:#fff; font-size:9.6pt; }
+        .bar, .pager, #lb { display:none !important; }
+        .wrap { max-width:none; padding:0; }
+        figure img { height:34mm; }
+        .sec, .finds li, figure, .out div, .role, table { break-inside:avoid; }
+        .sec-head { break-after:avoid; }
+        a { text-decoration:none; }
+      }
     </style>
   </head>
   <body>
-    <main class="detail">
-      <a class="back" href="index.html">← Portfolio</a>
-      <section class="page" id="overview">
-        <p class="eyebrow">Project / 01</p>
-        <h1 id="title"></h1>
-        <p id="summary" class="summary"></p>
-        <dl class="meta"><div><dt>기간</dt><dd id="period"></dd></div><div><dt>활용 도구</dt><dd id="tools"></dd></div><div><dt>프로젝트 형태</dt><dd>팀 프로젝트</dd></div></dl>
-        <div class="section-grid"><h2>BACKGROUND</h2><p id="background"></p></div>
-        <div class="section-grid"><h2>PERSONAL CONTRIBUTION</h2><div class="contribution"><strong>개인 기여도</strong><p id="contribution"></p></div></div>
-      </section>
-      <section class="page" id="process">
-        <p class="eyebrow">Project / 02</p>
-        <div class="section-grid"><h2>PROCESS</h2><div class="process-content"><div class="flow" id="flow"></div><div class="figure-gallery" id="figures"></div></div></div>
-        <div class="section-grid"><h2>WHY THIS PROCESS</h2><p id="why"></p></div>
-        <div class="section-grid"><h2>OUTCOME</h2><div class="outcome" id="outcome"></div></div>
-        <p class="note">외부 이미지는 사용하지 않았습니다. 상세 페이지의 시각 자료는 추후 원하실 때 결과보고서에서 발췌한 자료만 추가할 수 있습니다.</p>
-      </section>
-    </main>
+    <nav class="bar">
+      <a class="home" href="index.html">← Portfolio</a>
+      <span class="now" id="now"></span>
+      <span class="dots" id="dots"></span>
+    </nav>
+    <main class="wrap" id="main"></main>
+    <div id="lb" hidden><img alt="" /><p></p></div>
+
     <script>
-      const projects = {
+      const ORDER = ["radar", "engine", "wafer", "coating", "ev"];
+
+      const P = {
+        /* ================================================================= */
         radar: {
           title: "LG이노텍 레이더 센서 품질 예측",
-          summary: "자율주행 레이더 센서 데이터를 바탕으로 성능 저하 가능성을 예측하고, 품질 개선 방향을 찾은 프로젝트입니다.",
-          period: "결과보고서에 활동 기간이 명시되지 않음",
-          tools: "데이터 분석 · 예측 모델링 · 시각화",
-          background: "레이더는 차량 주변의 물체와 거리를 파악하는 핵심 센서입니다. 센서 성능의 이상 징후를 사전에 파악해 품질 문제를 줄이고자, 센서 데이터를 기반으로 성능 저하 여부를 예측하는 분석 과제를 설정했습니다.",
-          contribution: "결과보고서에서 개인별 담당 업무를 명확히 확인할 수 없어, 역할을 임의로 기재하지 않았습니다. 담당 범위를 알려주시면 이 항목을 실제 기여 내용으로 교체할 수 있습니다.",
-          flow: [["문제 정의","성능 저하를 조기에 예측할 필요성 설정"],["데이터 이해","레이더 센서의 작동 원리와 변수 검토"],["분석·모델링","성능 저하 예측 및 주요 요인 탐색"],["개선안 도출","분석 결과를 품질 관리 관점으로 정리"]],
-          why: "센서 품질 문제는 발생 후 대응보다 사전 감지가 중요합니다. 따라서 도메인 이해를 먼저 확보한 뒤 데이터에서 이상 징후를 찾고, 예측 결과를 실제 품질 개선 방향으로 연결하는 순서로 진행했습니다.",
-          outcome: [["배운 점","센서 도메인 지식과 데이터 분석을 함께 해석해야 품질 개선에 활용 가능한 인사이트를 만들 수 있음을 학습했습니다."],["산출물","성능 저하 예측을 위한 분석 흐름과 품질 개선 방향을 제시했습니다."]]
+          code: "Radar Quality · Vital Mapping",
+          lede: "레이더 성능 편차를 만드는 Vital Few X를 규명하고, 공정 Recipe 최적화 방향까지 연결한 프로젝트입니다. 상관계수로는 아무것도 설명되지 않는 데이터에서 시작해 모델 → SHAP → 물리 해석 순서로 근거를 쌓았습니다.",
+          meta: [
+            ["기간", "08.26 – 10.17 · 사전 기획부터 발표까지"],
+            ["팀 구성", "팀원 4인 + 튜터 2인 (내일배움캠프 5조)"],
+            ["나의 역할", "대시보드 총괄 — 데이터 탐색, 머신러닝 성능 개선, 대시보드 제작"],
+            ["분석 도구", "Pandas · Matplotlib / Seaborn · LightGBM · XGBoost · CatBoost · TensorFlow / Keras Tuner · SHAP · Streamlit"],
+            ["데이터", "공정 변수 X 56종 (체결·방열·하우징·안테나·RF 실장 등) / 품질 지표 Y (Gain 평균·편차, SNR 평균·각도별)"]
+          ],
+          stats: [
+            ["0.435", "Y_06 공정 능력 지수 Cpk", "Cp는 3.363인데 Cpk가 0.435 — 산포보다 ‘스펙 중심 이탈’이 진짜 문제임을 확인"],
+            ["322점", "Y_10 관리 이탈점", "관리도 기준 이탈점 Y_05 285 · Y_11 287 · Y_06 99개 — 이상 원인 존재 가능성"],
+            ["MAE 1.958", "CatBoost 회귀 최고 성능", "NRMSE 14.44% · LightGBM 1.960 / XGBoost 2.024와 큰 차이 없음"],
+            ["+21.53", "X_18 Recipe 보정 제안량", "SHAP ≈ −2.1012 × X_18 + 28.2641 로부터 스펙 중심 이동량 산출"]
+          ],
+          background: [
+            "레이더는 악천후와 장거리에서도 물체의 방향·속도·거리를 잡아내는 자율주행 핵심 센서입니다. 성능은 안테나가 전파를 얼마나 잘 모으는지(Gain)와 신호가 잡음 대비 얼마나 뚜렷한지(SNR)로 표현되고, 이 두 지표의 편차가 곧 품질 편차가 됩니다.",
+            "과제는 공정 데이터 X만으로 취약 품질 특성 Y를 설명할 수 있는지, 그리고 현장에서 조정 가능한 관리 기준까지 뽑아낼 수 있는지였습니다. 최종 목표를 ‘Vital Few X 규명 + 공정 Recipe 최적화 + 취약 품질 모니터링 대시보드’ 세 가지로 잡고 출발했습니다."
+          ],
+          problems: [
+            ["다중공선성", "입력 변수 간 상관 히트맵에서 공정 그룹 단위로 높은 상관이 발견돼, 그룹 내 다중공선성을 PCA로 제거해야 했습니다."],
+            ["상관계수의 실패", "공정 데이터 X와 품질 데이터 Y 사이에는 뚜렷한 상관이 없었습니다. 상관만으로는 주요 변수를 고를 수 없어, 모델 학습을 통해 CTQ를 선정하는 경로로 바꿨습니다."],
+            ["Screening된 데이터", "Y 분포가 스펙 경계선에서 급격히 끊기고, n차 검사 결과가 전부 1.0(양품)이었습니다. 이미 선별된 데이터라는 뜻이라 불량 신호 자체가 희박했습니다."],
+            ["0으로 채워진 결측", "방열재 무게 변수 X_10·X_11은 대다수 값이 0으로 비정상 입력돼 결측치로 판단했습니다."]
+          ],
+          role: {
+            who: "대시보드 총괄 · 데이터 탐색 · 머신러닝 성능 개선",
+            items: [
+              "히스토그램과 Box-plot으로 0으로 입력된 결측과 이상치를 확인하고, IQR Capping 기준을 정해 학습이 흔들리지 않도록 정리했습니다.",
+              "LightGBM · XGBoost · CatBoost를 같은 조건에서 비교하며 파라미터 튜닝으로 회귀 성능을 끌어올렸습니다.",
+              "튜닝이 성능을 개선하지 못하고 트리 모델이 이론적 인과 변수를 집어내지 못한다는 사실을 확인해, 팀이 MLP 기반 딥러닝으로 전환할 근거를 만들었습니다.",
+              "도출한 Vital Few X와 예측 결과를 Streamlit 대시보드로 구성해, 취약 품질 특성을 한 화면에서 모니터링할 수 있게 했습니다."
+            ]
+          },
+          flow: [
+            ["08.26 – 08.29", "사전 기획", "분석 목적 정의, 문제 가설 수립"],
+            ["09.01 – 09.05", "데이터 이해", "공정·품질 컬럼 해석, 데이터 전처리"],
+            ["09.08 – 10.12", "분석 수행", "변수 간 관계 도출, 가설 검증 및 원인 탐색"],
+            ["10.13 – 10.15", "대시보드", "대시보드 디자인·설계, 분석 데이터 연결"],
+            ["10.14 – 10.17", "문서화 · 발표", "결과보고서 작성, 발표자료 준비"]
+          ],
+          prep: {
+            head: ["대상", "처리", "그렇게 판단한 이유"],
+            rows: [
+              ["X_10 · X_11 (방열재 무게)", "컬럼 제거", "대다수 값이 0으로 비정상 입력 → 결측치로 판단"],
+              ["n차 검사 통과 여부", "컬럼 Drop", "전부 1.0(통과)이라 결함 판별에 기여할 정보가 없음"],
+              ["주요 공정 변수 이상치", "IQR Capping", "1사분위 미만은 하한값, 3사분위 초과는 상한값으로 대체해 모델 학습 안정화"],
+              ["상관이 높은 공정 변수 그룹", "PCA 차원 축소", "그룹 내 다중공선성이 회귀 계수를 왜곡하기 때문"]
+            ]
+          },
+          extra: {
+            title: "현재 공정 능력 평가 — Cp는 충분한데 Cpk가 낮다",
+            caption: "Cp가 크고 Cpk가 작다는 것은 산포는 스펙 폭 안에 들어오지만 평균이 한쪽으로 치우쳐 있다는 뜻입니다. 개선 방향을 ‘산포 축소’가 아니라 ‘중심 이동’으로 잡은 근거가 됐습니다.",
+            head: ["품질 특성", "Cp", "Cpk", "평균", "표준편차", "관리 이탈점"],
+            rows: [
+              ["Y_05", "0.950", "0.683", "31.290", "2.543", "285"],
+              ["Y_06", "3.363", "0.435", "16.529", "1.893", "99"],
+              ["Y_10", "1.918", "0.869", "−22.400", "0.921", "322"],
+              ["Y_11", "1.405", "0.913", "24.325", "0.830", "287"]
+            ]
+          },
+          figures: [
+            ["fig-radar-corr.jpg", "공정 변수 X 간 상관 히트맵. 대각선 주변으로 붉은 블록이 뭉쳐 있어 그룹 단위 다중공선성이 확인됩니다.", "결과보고서 p.12"],
+            ["fig-radar-box.jpg", "주요 변수 Box-plot (Top 20). 이상치가 전반적으로 많아 IQR Capping을 적용했습니다.", "결과보고서 p.16"],
+            ["fig-radar-control.jpg", "취약 품질 특성 4종의 관리도. 관리 한계를 벗어난 점이 반복적으로 나타납니다.", "결과보고서 p.19 · p.21"],
+            ["fig-radar-importance.jpg", "모델이 뽑은 변수 중요도 Top 20. 상위 변수가 이론적 인과와 연결되지 않아 딥러닝 전환의 계기가 됐습니다.", "결과보고서 p.25"],
+            ["fig-radar-shap.jpg", "X_18의 SHAP 의존성 플롯과 선형 근사. 기울기 −2.1012에서 Recipe 보정량을 역산했습니다.", "결과보고서 p.31"],
+            ["fig-radar-dash.jpg", "제작한 Streamlit 대시보드. 예측 결과·주요 Feature·SHAP 분석을 한 화면에 배치했습니다.", "결과보고서 p.34"]
+          ],
+          findings: [
+            ["개선 방향은 ‘중심 이동’", "Cp 대비 Cpk가 크게 낮아, 산포를 줄이는 것보다 공정 평균을 스펙 중심으로 옮기는 것이 우선 과제임을 확인했습니다."],
+            ["관리도에서 이상 원인 확인", "Y_05 285 · Y_06 99 · Y_10 322 · Y_11 287개의 관리 이탈점이 나와, 우연이 아닌 이상 원인이 존재할 가능성을 확인했습니다."],
+            ["분류 접근은 실패", "Y_11 스펙 19.6–26.6의 중앙 50%(21.35–24.85)를 Golden Zone으로 정의해 최상품/일반품 이진 분류를 시도했습니다. class_weight='balanced'로 일반품을 인식하기 시작했지만 F1은 0.27에 그쳤습니다."],
+            ["회귀 모델도 인과를 못 잡음", "CatBoost MAE 1.9582 / NRMSE 14.44%로 가장 우수했지만, 세 모델 모두 이론적 인과관계를 가진 변수를 상위로 올리지 못했습니다."],
+            ["딥러닝으로 전환", "Keras Tuner로 MLP 층 수·뉴런 수·학습률 조합을 탐색하고, 배치 정규화 · Dropout · Early Stopping으로 학습을 안정화했습니다."],
+            ["Vital Few X 도출", "Gain 평균(Y_05 · Y_11)은 4번 안테나 패드 위치 X_17에, 신호대 잡음비(Y_06 · Y_10)는 5번 안테나 패드 위치 X_18에 반응했습니다."],
+            ["물리적 해석으로 검증", "위상 배열 안테나에서 패드 위치는 곧 경로 길이이고, 경로 길이가 위상을 결정합니다. 위상이 어긋나면 주 빔 에너지가 사이드 로브로 새어 Gain이 떨어지고 노이즈가 늘어납니다 — 모델이 찾은 변수가 이론과 맞아떨어졌습니다."],
+            ["공정 Recipe 최적화 제안", "SHAP Value ≈ −2.1012 × X_18 + 28.2641 관계식에서, 스펙 중심으로 이동시키려면 X_18을 기존 레시피 대비 약 21.5328 증가시켜야 한다는 결론을 냈습니다."]
+          ],
+          outcome: [
+            ["성과", "상관계수로 설명되지 않는 데이터에서 모델 → SHAP → 물리 해석 순으로 접근해, 이론적 인과성을 갖는 Vital Few X와 관계식까지 도출했습니다."],
+            ["한계", "블라인드 처리된 데이터라 변수의 의미를 추정에 의존해야 했고, 다른 변수의 영향이 배제된 제한적 인과관계입니다. 공채 시즌과 겹쳐 몰입 시간이 부족했던 점도 아쉽습니다."],
+            ["다음에 한다면", "출력층에 분위 회귀를 도입해 단일 예측값 대신 범위를 예측하고, Featuretools로 예상 밖의 변수 조합을 탐색해 보고 싶습니다. 대시보드에는 X를 직접 조작해 Y 반응을 관찰하는 인터랙티브 기능이 필요합니다."]
+          ]
         },
+
+        /* ================================================================= */
         engine: {
           title: "엔진 결함 원인 분석",
-          summary: "엔진 품질 데이터를 탐색·시각화해 공정 변수와 결함 발생의 관계를 살펴보고, 관리가 필요한 요인을 정리한 프로젝트입니다.",
-          period: "결과보고서에 활동 기간이 명시되지 않음",
-          tools: "EDA · 데이터 전처리 · 시각화",
-          background: "엔진 품질 관리에서는 결함 발생 후의 판정보다 결함과 연관된 공정 조건을 빠르게 찾는 일이 중요합니다. 변수별 분포와 결함 여부를 비교해 결함 발생과 관련된 조건을 파악하는 것을 목표로 했습니다.",
-          contribution: "결과보고서에서 개인별 담당 업무를 명확히 확인할 수 없어, 역할을 임의로 기재하지 않았습니다. 담당 범위를 알려주시면 이 항목을 실제 기여 내용으로 교체할 수 있습니다.",
-          flow: [["문제 정의","엔진 결함과 품질 변수의 관계 설정"],["데이터 탐색","변수 분포와 이상치 확인"],["비교 분석","결함 여부별 변수 차이 시각화"],["관리 요인 정리","품질 관리에 필요한 관찰 지점 도출"]],
-          why: "결함 원인을 단일 변수로 단정하기 전에 데이터의 분포와 품질을 확인해야 합니다. 탐색적 분석을 통해 비교 기준을 만들고, 시각화로 관계를 검증하는 방식으로 문제를 구조화했습니다.",
-          outcome: [["배운 점","품질 데이터에서는 이상치·결측치·변수 분포를 먼저 점검하는 과정이 분석 결과의 신뢰도를 좌우함을 학습했습니다."],["산출물","결함 발생과 공정 변수의 관계를 확인하기 위한 탐색·시각화 분석 결과를 정리했습니다."]]
+          code: "자동차 엔진 센서 데이터 기반 결함 분석 및 예측",
+          lede: "엔진 센서 데이터로 결함 유형 간 차이를 통계적으로 검정하고, 4행정 사이클과 공연비 이론을 대입해 숫자로만 남을 뻔한 Fault 0–3에 물리적 이름을 붙인 프로젝트입니다.",
+          meta: [
+            ["기간", "07.08 – 07.12 (5일)"],
+            ["팀 구성", "팀원 4인 + 튜터 2인 (내일배움캠프 심화 프로젝트 7조)"],
+            ["나의 역할", "분석 검증 — EDA, 정규성 검정, 분석 결과 검증"],
+            ["분석 도구", "Pandas · SciPy (Shapiro–Wilk, Kruskal–Wallis, Dunn) · scikit-learn (Random Forest) · XGBoost · Matplotlib / Seaborn"],
+            ["데이터", "55,999행 · 결측 없음 · Fault(Integer) 외 전부 Float 수치형"]
+          ],
+          stats: [
+            ["14 / 14", "결함 상태별 유의차를 보인 변수", "Kruskal–Wallis p < 0.0001 — 본페로니 보정 α ≈ 0.0036에서도 전부 유의"],
+            ["0.7496", "튜닝 후 랜덤 포레스트 정확도", "F1 0.7496 · XGBoost는 0.7435로 사실상 동률"],
+            ["1.00 vs 0.50", "결함별 F1 격차", "정상·결함1은 완벽하게 분류되는데, 결함2·3은 0.50 내외로 서로 섞임"],
+            ["3종", "이름을 붙인 결함", "Rich Mixture · Lean Mixture · Low Voltage"]
+          ],
+          background: [
+            "자동차 결함은 대형 사고, 인명 피해, 대규모 리콜처럼 심각한 사회적·경제적 손실로 이어질 수 있습니다. 센서 데이터로 결함 발생을 사전에 예측할 수 있다면 품질 저하와 생산 손실을 함께 예방할 수 있습니다.",
+            "그래서 프로젝트의 질문을 하나로 좁혔습니다 — 결함 상태별 주요 변수의 분포와 평균을 비교해서, 결함 발생에 기여하는 유의미한 패턴을 파악하고 평가할 수 있는가?"
+          ],
+          problems: [
+            ["이상치를 지우지 않기로", "결함 분석이 목적이므로 이상치 제거를 하지 않았습니다. 이상치 자체가 결함 신호일 수 있기 때문입니다."],
+            ["정규성 없음", "Shapiro–Wilk 검정에서 모든 연속 변수의 p-value가 0에 수렴했습니다. 모수 검정 경로를 버리고 비모수 검정으로 방향을 바꿨습니다."],
+            ["다중비교 문제", "14개 변수를 동시에 검정하므로 1종 오류가 누적됩니다. 본페로니 보정으로 유의수준을 0.05/14 ≈ 0.0036까지 낮춰 재확인했습니다."],
+            ["구분되지 않는 두 결함", "결함 2와 3은 센서 값 분포가 겹쳐 있어, 임계값 분할로 작동하는 트리 기반 분류기가 두 그룹을 가르지 못했습니다."]
+          ],
+          role: {
+            who: "분석 검증 — EDA · 정규성 검정 · 분석 결과 검증",
+            items: [
+              "기술통계와 Boxplot · 히스토그램으로 결함 상태별 변수 분포를 비교하며 EDA를 수행했습니다.",
+              "Shapiro–Wilk 정규성 검정으로 비모수 경로를 확정하고, Kruskal–Wallis와 Dunn 사후검정(본페로니 보정) 결과를 검증했습니다.",
+              "‘모든 변수가 유의하다’는 결과를 그대로 받아들이지 않고, 표본이 커지며 p-해킹이 유도되었을 가능성까지 해석의 한계로 함께 정리했습니다.",
+              "랜덤 포레스트와 XGBoost의 분류 리포트를 대조해, 성능 정체가 모델 문제가 아니라 데이터 분포의 문제임을 확인했습니다."
+            ]
+          },
+          flow: [
+            ["07.08 – 07.09", "사전 기획 · 데이터 탐색", "문제 정의 및 목표 설정, 기술통계·시각화, 정규성 검정"],
+            ["07.09 – 07.10", "데이터 분석 · 모델 학습", "비모수 검정과 다중비교, 머신러닝 학습, 파라미터 최적화"],
+            ["07.11 – 07.12", "보고서 작성 · 발표", "분석 결과 해석, 결론 도출, 발표 준비"]
+          ],
+          prep: {
+            head: ["대상", "처리", "그렇게 판단한 이유"],
+            rows: [
+              ["결측치", "처리 없음", "데이터셋에 결측 값이 존재하지 않음"],
+              ["이상치", "제거하지 않음", "결함 분석이 목적이므로 이상치가 결함의 신호일 수 있음"],
+              ["중복 행", "1행 제거", "55,999행 중 완전 중복 1행"],
+              ["스케일", "Standard Scaling", "거리·분할 기준이 변수 단위에 휘둘리지 않도록 모델 학습 전 정규화"]
+            ]
+          },
+          extra: {
+            title: "모델 성능 — 튜닝해도 0.75에서 멈춘다",
+            caption: "네 번의 시도 모두 전체 정확도 0.74–0.75에서 정체했습니다. 정상(0)과 결함1은 어떤 모델에서도 F1 1.00인 반면, 결함2·3은 0.5 근처를 벗어나지 못했습니다.",
+            head: ["모델", "정확도", "F1", "정상 · 결함1", "결함2 F1", "결함3 F1"],
+            rows: [
+              ["랜덤 포레스트", "0.7454", "0.7115", "1.00", "0.27", "0.63"],
+              ["XGBoost", "0.7457", "0.7457", "1.00", "0.53", "0.49"],
+              ["랜덤 포레스트 (튜닝)", "0.7496", "0.7496", "1.00", "0.53", "0.50"],
+              ["XGBoost (튜닝)", "0.7435", "0.7434", "1.00", "0.53", "0.50"]
+            ]
+          },
+          figures: [
+            ["fig-engine-qq.jpg", "MAP의 Q-Q Plot. 점들이 직선을 크게 벗어나 정규성이 성립하지 않습니다.", "결과보고서 p.9"],
+            ["fig-engine-dunn.jpg", "Dunn 사후검정 결과 (본페로니 보정). 어떤 결함 쌍에서 차이가 나는지 확인했습니다.", "결과보고서 p.11"],
+            ["fig-engine-cm.jpg", "랜덤 포레스트 Confusion Matrix. 정상·결함1은 완벽히 맞히지만 결함2와 3이 서로 넘어갑니다.", "결과보고서 p.14"],
+            ["fig-engine-imp.jpg", "변수 중요도. 연소 산물과 토크 관련 지표가 상위를 차지했습니다.", "결과보고서 p.15"],
+            ["fig-engine-co.jpg", "결함별 CO 분포. 결함1에서 CO가 뚜렷하게 높고 산포도 큽니다.", "결과보고서 p.29"],
+            ["fig-engine-lambda.jpg", "결함별 Lambda 분포. 결함1은 λ가 1.0 아래로 치우치고, 결함2·3은 1.0 언저리에 몰려 서로 구분되지 않습니다.", "결과보고서 p.29"]
+          ],
+          findings: [
+            ["정규성 검정 → 비모수 전환", "Shapiro–Wilk 결과 모든 연속 변수에서 정규성이 기각돼, Kruskal–Wallis 검정으로 경로를 바꿨습니다."],
+            ["14개 변수 전부 유의", "MAP · TPS · Force · Power · RPM · Consumption(L/H, L/100KM) · Speed · CO · HC · CO2 · O2 · Lambda · AFR 모두 p < 0.0001로, 본페로니 보정 후에도 유의했습니다."],
+            ["결함 1 = Rich Mixture", "λ < 1.0, AFR < 14.7의 농후 혼합. 불완전 연소로 CO와 HC가 올라가고 O2는 소모되며 연비가 악화됩니다."],
+            ["결함 2 = Lean Mixture", "λ > 1.0, AFR > 14.7의 희박 혼합. 잉여 산소로 O2가 올라가고 연소가 불안정해 출력이 떨어지며 노킹 위험이 있습니다."],
+            ["결함 3 = Low Voltage", "점화 시스템과 배터리·충전 계통 이상. Misfire가 발생하고 배기 CO2가 줄며 토크(Force)가 감소합니다."],
+            ["왜 모든 변수가 유의했나 (공학)", "엔진은 고도로 연결된 시스템이라 한 부분의 결함이 전체에 파급되고, ECU의 적응 제어가 하나의 센서 이상을 다른 센서 값에도 반영하기 때문입니다."],
+            ["왜 모든 변수가 유의했나 (통계)", "다중 변수가 동시에 변하면 각 변수의 분포가 함께 달라집니다. 또한 표본 크기가 커지면서 p-해킹이 유도되었을 가능성도 배제할 수 없습니다."],
+            ["왜 결함 2·3은 못 맞히나", "ECU의 보상 제어로 결함 초기에는 센서 값이 정상 범위에 머물고, 부하·온도·주행 패턴 같은 운전 조건의 영향이 결함 자체보다 클 수 있습니다. 트리 기반 모델은 임계값 경계에서 분포가 겹치면 성능이 급격히 떨어집니다."]
+          ],
+          outcome: [
+            ["성과", "통계 검정 결과를 4행정 사이클과 공연비(λ) 이론에 대입해, 숫자 라벨에 불과했던 Fault 1·2·3에 Rich / Lean / Low Voltage라는 물리적 정체를 부여했습니다."],
+            ["한계", "정확도가 0.75에서 정체한 원인을 데이터 분포 문제로 규명하는 데 그쳤고, 그 이상의 성능 개선까지는 도달하지 못했습니다."],
+            ["다음에 한다면", "층별 분석, 군집 분석, 주성분 분석처럼 겹친 분포를 분리할 수 있는 접근을 더 시도해 보고 싶습니다."]
+          ]
         },
+
+        /* ================================================================= */
         wafer: {
           title: "반도체 웨이퍼 결함 분석",
-          summary: "공정 조건과 장비·교대조 데이터를 분석해 웨이퍼 결함 유형 및 결함 수에 영향을 주는 요인을 탐색한 프로젝트입니다.",
-          period: "2026.06.09 - 2026.06.13",
-          tools: "데이터 전처리 · EDA · 가설 검정 · 시각화",
-          background: "웨이퍼 공정에서는 온도·압력·노광 시간과 장비 상태, 작업 환경이 결함에 영향을 줄 수 있습니다. 공정 변수의 이상치와 제한된 결함 유형을 점검하고, 결함 수와의 관계를 가설 기반으로 분석했습니다.",
-          contribution: "데이터 분석, 결론 도출, 시각화를 담당했습니다. 공정 변수와 결함 간 관계를 가설에 맞춰 분석하고, 결과를 이해하기 쉬운 시각 자료와 결론으로 정리했습니다.",
-          flow: [["가설 설정","공정 조건·장비 로그·교대조의 영향 가정"],["전처리","온도·압력 이상치와 장비 로그 유효 범위 점검"],["시각화 분석","변수 관계와 결함 분포 비교"],["결론 도출","핵심 요인 및 개선 방향 정리"]],
-          why: "분석 전 온도 500도 수준의 이상치와 압력 극단값, 장비 로그의 유효 범위를 확인했습니다. 데이터 품질을 먼저 점검한 뒤 가설별 시각화로 관계를 비교해야 결론을 과장하지 않을 수 있기 때문입니다.",
-          outcome: [["정량 확인","온도·압력 이상치와 장비 로그의 사용 범위를 식별하고, 결함 분석에 필요한 데이터 슬라이싱 기준을 마련했습니다."],["배운 점","제조 데이터는 분석 기법 이전에 데이터의 발생 맥락과 품질을 검증해야 한다는 점을 학습했습니다."]]
+          code: "6 Sigma · 가설 기반 시각화 분석",
+          lede: "공정 조건·장비·작업 일자·교대조를 네 개의 가설로 나눠 각각 검증하고, 결함을 실제로 키우는 요인과 그렇게 보이기만 하는 요인을 갈라낸 프로젝트입니다.",
+          meta: [
+            ["기간", "06.09 – 06.13 (5일)"],
+            ["팀 구성", "팀원 4인 + 튜터 1인 (내일배움캠프 기초 프로젝트 6조)"],
+            ["나의 역할", "데이터 분석 결론 — 시각화 담당, 분석 결론 도출"],
+            ["분석 도구", "Pandas · Matplotlib / Seaborn · 6시그마 · 카이제곱 검정 · 관리도(Control Chart)"],
+            ["데이터", "공정 변수(온도 · 압력 · 노광 시간 · 작업 시각), 공정 단계, 장비 로그, LOT, 교대조"]
+          ],
+          stats: [
+            ["157.6 ℃ vs 143.4 ℃", "Etching 공정 결함 유무별 평균 온도", "결함 수 ≥ 1인 웨이퍼가 14 ℃ 이상 고온에서 처리됨"],
+            ["약 2배", "오후 시간대 평균 결함 수", "13–19시에는 정상 웨이퍼가 아예 없음 — 처리 웨이퍼 수는 오전과 거의 동일"],
+            ["r = 0.43", "Etching 온도–결함 수 상관", "Non-Etching은 0.00 — 공정별로 지배 요인이 다르다는 증거"],
+            ["p ≈ 0", "교대조 × 결함 카이제곱", "‘교대조와 결함은 독립’이라는 귀무가설을 압도적으로 기각"]
+          ],
+          background: [
+            "시각화를 실습하면서 새로운 도메인 지식도 함께 쌓자는 취지로 반도체 웨이퍼 데이터를 선택했습니다. 결측치 처리 여부와 가설을 먼저 정하고, 시각화로 얻은 근거로 가설의 타당성을 검증하는 순서로 진행했습니다.",
+            "데이터를 열자마자 정리해야 할 문제가 먼저 보였습니다. 평균에서 크게 벗어난 500 ℃ 온도, 양 극단에 몰린 압력 값, 파티클과 오버에치만 존재하는 결함 유형, 그리고 장비 데이터에만 유효한 equipment_log 컬럼이었습니다."
+          ],
+          problems: [
+            ["가설 1", "공정 조건(온도 · 압력 · 노광 시간)과 작업 시각(hour)은 결함 수와 유의미한 상관관계를 가질 것이다."],
+            ["가설 2", "공정별로 결함에 영향을 주는 주요 요인은 상이할 것이다."],
+            ["가설 3", "장비 식별번호 및 작업 일자(equipment_log)는 결함 유형 또는 결함 수에 유의미한 영향을 미칠 것이다."],
+            ["가설 4", "교대조별로 유의미한 결함률 차이가 존재하고, 서로 상관관계가 있을 것이다."]
+          ],
+          role: {
+            who: "시각화 담당 · 데이터 분석 결론 도출",
+            items: [
+              "네 개 가설 각각에 맞는 시각화를 설계하고, 그래프에서 읽어낸 근거로 결론을 도출하는 역할을 맡았습니다.",
+              "날짜별 결함률에 관리도를 그려 이상탐지 규칙으로 특별 원인 여부를 판정하고, 교대조는 두 범주라는 점에서 카이제곱 검정을 적용했습니다.",
+              "압력은 IQR로 정한 상·하한을 가상의 LSL / USL로 두고 시그마 수준을 계산해, 이상치를 지울지 남길지를 수치로 판단했습니다.",
+              "분포에 차이가 보여도 공정 조건에서 근거를 찾지 못하면 ‘단정하기 어렵다’로 결론을 닫는 기준을 끝까지 유지했습니다."
+            ]
+          },
+          flow: [
+            ["06.09", "사전 기획", "분석 데이터셋 선정, 기획서 작성, 도메인 지식 습득"],
+            ["06.10", "데이터 전처리", "전처리 기준 선정 및 실행"],
+            ["06.11 – 06.12", "데이터 시각화", "가설별 시각화 진행, 변수 간 관계 도출"],
+            ["06.12 – 06.13", "피드백 · 결론", "분석 결과 기반 인사이트 도출 및 개선 방향 제시"],
+            ["06.13", "문서화 · 발표", "결과보고서 작성, 발표자료 준비"]
+          ],
+          prep: {
+            head: ["대상", "처리", "그렇게 판단한 이유"],
+            rows: [
+              ["온도", "IQR 이상치 제거 + 100 · 200처럼 딱 떨어지는 값 제거", "평균에서 크게 벗어난 500 ℃가 존재하고, 반올림된 듯한 값은 입력 오류로 의심됨"],
+              ["압력", "제거 보류 후 시그마 수준으로 평가", "IQR 기준 이상치가 다수라 일괄 제거 시 정보 손실이 큼. IQR 상·하한(1.68 / 4.32)을 가상 LSL·USL로 두고 판단"],
+              ["노광 시간", "전처리 불필요", "이상치가 관측되지 않음"],
+              ["공정 단계명", "etch → etching 통일", "동일 공정이 두 가지 표기로 섞여 있었음"],
+              ["결함 유형", "unknown / no defect로 분류", "defect_count와 defect_type이 동시에 명시되어 있는지를 기준으로 구분"],
+              ["equipment_log", "장비 데이터로 슬라이싱", "유효한 값이 장비 데이터에만 국한된다고 판단"]
+            ]
+          },
+          extra: {
+            title: "가설별 판정 — 두 개는 지지, 하나는 보류",
+            caption: "차이가 보인다고 전부 원인으로 단정하지 않았습니다. 가설 3은 분포 차이가 관측됐지만 공정 조건으로 설명되지 않아 결론을 유보했습니다.",
+            head: ["가설", "판정", "근거"],
+            rows: [
+              ["① 공정 조건 · 작업 시각 ↔ 결함 수", "지지", "오후 평균 결함 수가 오전의 약 2배, 처리 웨이퍼 수는 동일 — 처리량 차이가 아님"],
+              ["② 공정별 주요 요인 상이", "지지", "Etching은 온도 0.43 + 시각 0.32, Non-Etching은 시각만 반응"],
+              ["③ 장비 · 작업 일자 영향", "보류", "EQ-ETCH-07과 2025-03-06에서 특이성은 있으나, 공정 조건 비교로는 차이를 설명하지 못함"],
+              ["④ 교대조별 결함률 차이", "지지", "카이제곱 검정 p-value ≈ 0으로 독립 가설 기각"]
+            ]
+          },
+          figures: [
+            ["fig-wafer-corr.jpg", "공정 단계별 변수–결함 수 상관관계. Etching에서만 온도가 0.43으로 두드러집니다.", "결과보고서 p.12"],
+            ["fig-wafer-shift.jpg", "결함 수별 근무 시간대 웨이퍼 수. 결함 0건 구간에 오후(주황) 막대가 없습니다.", "결과보고서 p.12"],
+            ["fig-wafer-etchtemp.jpg", "Etching 공정 내 결함 유무에 따른 평균 온도 비교 — 157.56 ℃ vs 143.40 ℃.", "결과보고서 p.14"],
+            ["fig-wafer-pressure.jpg", "압력 분포와 시그마 기준선. IQR 상·하한을 가상 LSL / USL로 두고 공정 수준을 평가했습니다.", "결과보고서 p.9"],
+            ["fig-wafer-control.jpg", "날짜별 결함률 관리도. 2025-03-06이 관리 한계(UCL)를 벗어납니다.", "결과보고서 p.19"],
+            ["fig-wafer-hour.jpg", "시간대별 결함 발생 비율. 13시를 기점으로 계단처럼 올라섭니다.", "결과보고서 p.22"]
+          ],
+          findings: [
+            ["오후에는 정상 웨이퍼가 없다", "오후 근무시간(13–19시)에 처리된 웨이퍼는 전부 결함이 발생했고, 오전(06–12시) 대비 평균 결함 수가 2배 가까이 높았습니다. 두 시간대의 처리 웨이퍼 수는 거의 동일해 물량 차이로는 설명되지 않습니다."],
+            ["고온이 특정 결함을 키운다", "Overetch와 Unknown 유형(결함 수 ≥ 3)에서 평균 공정 온도가 높을수록 결함 수가 증가하는 경향이 뚜렷했습니다. 공정 온도를 낮추면 불량률을 줄일 수 있을 것으로 기대됩니다."],
+            ["공정마다 지배 요인이 다르다", "Etching 공정에서는 공정 온도와 작업 시각이 함께 결함에 영향을 미쳤지만, Non-Etching에서는 작업 시각만 민감하게 반응했습니다. 공정 특성에 맞는 맞춤형 품질관리 전략이 필요하다는 결론으로 이어졌습니다."],
+            ["Etching은 민감 공정", "Etching은 평균 온도 자체가 높고 고온 영역 분포도 두터우며, No Defect 샘플 비율이 Non-Etching보다 현저히 적었습니다. 온도 조건이 결함 발생을 실질적으로 유도한다는 강한 시사점입니다."],
+            ["장비는 범인이 아니었다", "LOT 간 차이는 없었고 EQ-ETCH-07에서만 결함 수 분포에 차이가 보였지만, 장비별 공정 조건을 비교해도 특이점을 찾지 못했습니다. 현재 데이터 기준으로는 유의미한 영향을 준다고 단정하기 어렵다는 결론을 냈습니다."],
+            ["2025-03-06의 결함률 100%", "관리도에서 관리 한계를 벗어난 날짜가 존재했고 결함률 100%가 관측됐습니다. 공정 조건 비교에서는 차이가 없어, 설비 이상이나 작업자 실수 같은 외적 요인 가능성이 높다고 판단했습니다 — 해당 일자의 설비 점검 이력과 작업자 배치 정보가 추가로 필요합니다."],
+            ["교대조 효과 검증", "품질 산포의 원인은 작업자와 기계의 산포(gauge R&R)로 나뉩니다. 주간/야간 교대조와 결함 발생의 독립성을 카이제곱 검정으로 확인한 결과 p-value가 0에 매우 가까워 귀무가설을 기각했습니다."]
+          ],
+          outcome: [
+            ["성과", "개인이 가설 하나씩을 맡아 심도 있게 파고들 수 있었고, 근거 없이 결론을 확대하지 않는 기준을 끝까지 지켰습니다. 코드를 짜기 전에 목적과 방향성을 잡는 일이 먼저라는 것을 배웠습니다."],
+            ["한계", "각자의 코딩 스타일에 따라 변수명과 시각화 방식이 달라, 디테일을 챙기고 코드를 통합해 서로 이해시키는 데 상당한 비용이 들었습니다."],
+            ["다음에 한다면", "복잡하고 큰 데이터를 다룰수록 분석 절차와 코드를 한 사람이 통합하는 체계가 필요합니다. 결론 도출 단계를 더 촘촘하게 설계하고 싶습니다."]
+          ]
         },
+
+        /* ================================================================= */
         coating: {
           title: "선박 도장 불량 예측",
-          summary: "선박 도장 이미지 데이터를 정리·분석해 도장 상태와 불량 유형을 구분하고, 품질 검수에 활용할 기준을 탐색한 프로젝트입니다.",
-          period: "2026.09.09 결과보고서 기준",
-          tools: "이미지 데이터 전처리 · 분류 분석",
-          background: "선박 도장 품질은 외관뿐 아니라 부식 방지와 유지보수 비용에도 영향을 줍니다. 사람이 이미지를 확인하는 검사 과정을 보조할 수 있도록 도장 불량 유형을 데이터로 구분하는 문제를 설정했습니다.",
-          contribution: "결과보고서에서 개인별 담당 업무를 명확히 확인할 수 없어, 역할을 임의로 기재하지 않았습니다. 담당 범위를 알려주시면 이 항목을 실제 기여 내용으로 교체할 수 있습니다.",
-          flow: [["데이터 구성","정상·불량 도장 이미지 수집 및 분류"],["전처리","이미지 라벨·품질·분포 점검"],["유형 분석","도장 상태와 불량 유형 구분"],["검수 기준 탐색","현장 적용을 위한 판단 기준 정리"]],
-          why: "이미지 기반 품질 검수에서는 각 유형의 데이터 수가 치우치지 않는지가 중요합니다. 보고서의 정상 이미지 400장과 유형별 이미지 데이터를 기반으로 분포를 먼저 정리한 뒤, 상태 구분 기준을 탐색했습니다.",
-          outcome: [["정량 확인","총 1,200장의 도장 이미지 데이터셋을 기준으로 분석을 진행했습니다."],["배운 점","이미지 분류 과제는 데이터 라벨의 일관성과 클래스별 수량 균형이 결과 해석의 출발점임을 학습했습니다."]]
+          code: "5-Class 도장면 결함 분류 · 리더보드 1위",
+          lede: "선박 도장면 이미지를 5개 클래스로 자동 분류하는 딥러닝 모델을 만들고, 모델 구조가 아니라 전처리를 고쳐서 Public Score 0.9889 · 리더보드 1위를 달성한 프로젝트입니다.",
+          meta: [
+            ["기간", "2026.09.09 (결과보고서 · 발표 기준)"],
+            ["팀 구성", "K-뉴딜아카데미 4조"],
+            ["나의 역할", "결과보고서에 개인별 담당이 구분되어 있지 않아 임의로 기재하지 않았습니다"],
+            ["분석 도구", "PyTorch · ResNet-18 / EfficientNet-B0 전이학습 · Linear SVM · torchvision transforms"],
+            ["데이터", "총 1,200장 — 스크래치 · 부풀음 · 도막떨어짐 · 이물질포함 각 200장 + 양품 400장(선수 200 + 외판 200) · 원본 1,272–2,851px"]
+          ],
+          stats: [
+            ["0.988963", "최종 Public Score", "리더보드 1위 — Validation Accuracy와 Macro F1 모두 0.99"],
+            ["+0.0416", "Baseline 대비 개선폭", "0.9473 → 0.9548 → 0.978 → 0.9889, 전부 전처리 변경으로 얻은 상승"],
+            ["8 epoch", "Early Stopping 시점", "최대 25 epoch 중 Best F1 0.9876에서 조기 종료"],
+            ["3건 / 240장", "Validation 오분류", "모두 스크래치 관련 — 표면 반사광과 실제 스크래치의 시각적 유사성"]
+          ],
+          background: [
+            "선박 도장 품질은 외관을 넘어 부식 방지와 유지보수 비용에 직결됩니다. 사람이 눈으로 확인하는 검사 과정을 자동화하기 위해, 촬영된 도장면 이미지를 스크래치 · 부풀음 · 도막떨어짐 · 이물질포함 · 양품 5가지로 자동 분류하는 딥러닝 모델을 개발하는 것이 목표였습니다.",
+            "클래스별로 형태와 질감이 뚜렷이 구분된다는 점 — 스크래치는 선형, 부풀음은 원형 뭉침, 도막떨어짐은 박리와 소지 노출, 이물질포함은 미세 알갱이 분산, 양품은 균일한 표면 — 이 분류 문제로 접근할 근거가 됐습니다."
+          ],
+          problems: [
+            ["클래스 불균형", "양품 400장이 결함 클래스(각 200장) 대비 2배라, CrossEntropyLoss에 class_weight='balanced'를 반영해 소수 클래스의 학습 신호를 강화했습니다."],
+            ["복합 결함 스팟 체크", "클래스별 랜덤 15장씩 총 60장을 육안으로 확인한 결과, 한 이미지에 서로 다른 결함이 동시에 나타나는 사례가 없었습니다. 이미지당 결함 유형이 1개라는 폴더 라벨링 가정이 타당함을 확인하고, Multi-label이 아닌 단일 라벨 분류로 확정했습니다."],
+            ["색상 이상치 검증", "RGB 채널 분석에서 B값이 유독 높은 이미지 34장을 식별해 직접 확인했습니다. 파란 배경이 특정 클래스에 편중되지 않고 양품 · 도막떨어짐 · 스크래치에 고르게 분포 — 라벨링 오류가 아니라 실제 파란색으로 도장된 선박 부재였습니다. 제거하지 않고 ColorJitter에 hue를 추가해 색상 변동에 강건하도록 대응했습니다."],
+            ["종횡비가 제각각", "원본 해상도가 1,272–2,851px이고 가로형·세로형이 섞여 있어, 단순 Resize(224×224)는 이미지를 강제로 찌그러뜨립니다. 도막떨어짐처럼 국소적인 결함은 왜곡과 손실 위험이 컸습니다."]
+          ],
+          role: {
+            who: "개인 역할 구분 없음 — 프로젝트 차원의 작업 기록",
+            items: [
+              "결과보고서에 팀원별 담당 업무가 구분되어 있지 않아, 이 항목은 프로젝트에서 실제로 수행된 작업을 기준으로 정리했습니다.",
+              "EDA 단계에서 복합 결함 스팟 체크와 RGB 채널 기반 색상 이상치 검증을 수행해, 라벨링 가정과 데이터 유지 여부를 근거를 갖고 결정했습니다.",
+              "Baseline(EfficientNet-B0 feature + Linear SVM)과 ResNet-18 전체 Fine-tuning을 비교하고, Grayscale → RGB, Stretch → Letterbox로 전처리를 단계적으로 바꾸며 성능을 검증했습니다.",
+              "담당 범위를 알려주시면 이 항목을 실제 기여 내용으로 교체할 수 있습니다."
+            ]
+          },
+          flow: [
+            ["01", "데이터 개요", "클래스별 분포 확인, 복합 결함 · 색상 이상치 검증"],
+            ["02", "데이터 전처리", "Letterbox Resize, Augmentation, class_weight 보정"],
+            ["03", "모델 선정", "Baseline(SVM) vs ResNet-18 전체 Fine-tuning 비교"],
+            ["04", "파라미터 튜닝", "학습률 · 스케줄러 · Early Stopping 설정"],
+            ["05", "결과 검증", "Validation Confusion Matrix와 Public Score 대조"]
+          ],
+          prep: {
+            head: ["구성", "설정", "그렇게 정한 이유"],
+            rows: [
+              ["Resize", "Letterbox 224×224 (fill = 0, 검은색)", "긴 변을 224에 맞추고 남는 영역만 패딩해 원본 형태·비율을 보존. 패딩이 불필요한 특징으로 학습되지 않도록 단순 상수 색으로 통일"],
+              ["색상 채널", "Grayscale → RGB 유지", "그레이스케일은 배경 패널의 색상 노이즈를 지우지만, ResNet-18은 RGB 기반 Pretrained 모델이라 사전학습 분포와 어긋남"],
+              ["Augmentation", "Horizontal Flip(p=0.5), Rotation ±10°, ColorJitter(brightness/contrast 0.2, hue 0.1)", "좌우 대칭 결함을 고려하되, 스크래치처럼 방향성 있는 결함이 왜곡되지 않도록 회전은 약하게. hue는 패널 색상 다양성 대응"],
+              ["Loss", "CrossEntropyLoss + class_weight = balanced", "양품 400장 vs 결함 각 200장의 불균형 보정"],
+              ["Normalize", "ImageNet mean / std", "Pretrained ResNet-18의 입력 분포와 일치시켜 전이학습 효과 극대화"],
+              ["출력층", "Linear(512, 5)", "ImageNet 1,000-class 분류층을 5-class 문제에 맞게 교체"],
+              ["학습 설정", "Adam · LR 1e-4 · ReduceLROnPlateau(factor 0.5, patience 3) · Batch 32 · seed 42", "Pretrained 가중치를 훼손하지 않는 낮은 학습률, Validation F1이 정체하면 학습률을 낮춰 후반부 미세 조정"]
+            ]
+          },
+          extra: {
+            title: "Validation Confusion Matrix (n = 240)",
+            caption: "240장 중 오분류는 3건뿐이고 전부 스크래치와 얽혀 있습니다. 표면 반사광이 선형 스크래치처럼 보이는 것이 원인으로 해석됩니다.",
+            head: ["실제 \\ 예측", "도막떨어짐", "부풀음", "스크래치", "양품", "이물질포함"],
+            rows: [
+              ["도막떨어짐", "40", "0", "0", "0", "0"],
+              ["부풀음", "0", "39", "1", "0", "0"],
+              ["스크래치", "0", "0", "39", "1", "0"],
+              ["양품", "0", "0", "1", "79", "0"],
+              ["이물질포함", "0", "0", "0", "0", "40"]
+            ]
+          },
+          figures: [
+            ["fig-coating-dist.jpg", "클래스별 이미지 수. 양품 400장이 결함 클래스 각 200장의 2배입니다.", "결과보고서 p.5"],
+            ["fig-coating-blister.jpg", "부풀음 — 원형으로 뭉친 형태.", "결과보고서 p.7"],
+            ["fig-coating-peel.jpg", "도막 떨어짐 — 박리로 소지가 드러난 형태.", "결과보고서 p.7"],
+            ["fig-coating-particle.jpg", "이물질 포함 — 미세 알갱이가 표면에 분산된 형태.", "결과보고서 p.7"],
+            ["fig-coating-model.jpg", "Baseline과 ResNet-18의 Validation / Public Score 비교. Validation이 높다고 일반화가 보장되지 않습니다.", "결과보고서 p.12"],
+            ["fig-coating-journey.jpg", "전체 성능 개선 여정. 전처리를 바꿀 때마다 Public Score가 단계적으로 올라갑니다.", "결과보고서 p.18"]
+          ],
+          findings: [
+            ["Baseline의 함정", "EfficientNet-B0으로 feature를 추출(freeze)하고 Linear SVM(C=0.01)으로 분류한 Baseline은 Validation Macro F1이 0.9882로 매우 높았지만 Public Score는 0.9473에 그쳤습니다. Validation 성능만으로는 실제 일반화 성능을 담보할 수 없다는 사실을 먼저 확인했습니다."],
+            ["전체 Fine-tuning으로 전환", "ResNet-18을 backbone까지 전부 학습 가능 상태로 두었을 때 Validation 0.9950, Public 0.9548로 함께 올랐습니다. 데이터가 적어도 일부를 freeze하는 것보다 전체를 재학습하는 편이 이 데이터셋에 맞았습니다."],
+            ["Grayscale → RGB (+0.024)", "그레이스케일 변환은 배경 패널의 색상 노이즈를 지우는 장점이 있었지만, ResNet-18이 RGB 기반 Pretrained 모델이라는 점이 더 컸습니다. RGB로 학습하자 Public Score가 0.954에서 0.978로 올랐습니다."],
+            ["Stretch → Letterbox (+0.011)", "긴 변을 224px에 맞추고 남는 영역을 검은색으로 채우는 letterbox resize로 바꾸자 0.978에서 0.9889가 됐습니다. 원본 형태와 비율을 보존한 것이 국소 결함 인식에 직접 기여했습니다."],
+            ["입력 해상도 128 → 224", "원본이 2,000px대 고해상도이고 도막떨어짐 같은 국소 결함이 존재해, 과도한 다운샘플링은 결함 정보 손실 위험이 있었습니다. ImageNet 표준 입력 크기와도 정합됩니다."],
+            ["남은 오분류의 성격", "Validation 240장 중 오분류 3건은 모두 스크래치와 얽혀 있습니다(스크래치 → 양품 1건, 부풀음 → 스크래치 1건, 양품 → 스크래치 1건). 표면 반사광과 실제 스크래치의 시각적 유사성에서 비롯된 것으로 해석했습니다."],
+            ["검증 설계에서 얻은 교훈", "이전 실험에서는 촬영 세션이 Train과 Validation에 섞여 val 성능이 낙관적으로 나온 사례가 있었습니다. 최종 모델은 Public Score 0.988963으로 Validation 0.99와 근접해, 검증 설계가 제대로 작동했음을 확인했습니다."]
+          ],
+          outcome: [
+            ["성과", "최종 Public Score 0.988963으로 리더보드 1위를 달성했습니다. 모델 구조를 바꾸는 것보다 EDA 기반의 데이터 중심 접근(Letterbox, RGB 유지, class_weight 보정)이 성능을 훨씬 크게 끌어올렸습니다."],
+            ["한계", "표면 반사광과 스크래치를 구분하는 문제는 끝까지 완전히 해소하지 못했습니다."],
+            ["다음에 한다면", "반사광 오분류에 대한 별도 대처 방안을 마련하고, 여러 모델을 앙상블해 성능의 안정성을 확보하고 싶습니다."]
+          ]
         },
+
+        /* ================================================================= */
         ev: {
           title: "전기차 주행거리 및 배터리 성능 예측",
-          summary: "주행·배터리 센서 데이터를 분석해 주행 가능 거리와 배터리 전력 상태를 예측하고, 상태를 확인하는 대시보드 형태로 구성한 프로젝트입니다.",
-          period: "결과보고서에 활동 기간이 명시되지 않음",
-          tools: "Pandas · NumPy · Streamlit · Plotly · Altair",
-          background: "전기차의 주행 가능 거리는 속도와 배터리 전압·전류·온도·SoC 등 여러 조건에 따라 달라집니다. 센서 신호를 함께 해석해 주행거리 예측과 배터리 상태 확인에 활용하는 것을 목표로 했습니다.",
-          contribution: "결과보고서에서 개인별 담당 업무를 명확히 확인할 수 없어, 역할을 임의로 기재하지 않았습니다. 다만 함께 보관된 애플리케이션 소스에는 센서 컬럼 매핑, 전력·주행거리 계산, 상태 대시보드 구현 내용이 포함되어 있습니다.",
-          flow: [["데이터 점검","속도·SoC·전압·전류·온도 신호 확인"],["전처리","이상 범위 및 충·방전 상태 분리"],["예측 분석","주행거리·배터리 전력 상태 계산"],["대시보드","주행·충전·회생 상태 시각화"]],
-          why: "주행거리와 배터리 상태는 하나의 센서만으로 설명하기 어렵습니다. 따라서 핵심 신호를 함께 정리하고, 전압과 전류로 전력을 계산한 뒤 상태 변화가 보이도록 대시보드로 연결했습니다.",
-          outcome: [["산출물","주행 상태, 배터리 SoC·온도·전력, 회생 제동 에너지 등을 확인할 수 있는 인터랙티브 대시보드 구조를 구현했습니다."],["배운 점","예측값만 제시하는 것보다 사용자가 판단에 필요한 센서 흐름을 함께 볼 수 있게 만드는 것이 중요함을 학습했습니다."]]
+          code: "EV Lifemap · 주행거리 / 배터리 성능 예측 시스템",
+          lede: "여름·겨울 두 계절 109만 행의 주행 · 배터리 · HVAC 센서 로그를 5초 윈도우로 분해해 전력 소모의 원인을 규명하고, 잔여 주행거리 예측 모델과 운전자가 그대로 읽을 수 있는 HUD 대시보드까지 만든 프로젝트입니다.",
+          meta: [
+            ["기간", "결과보고서에 활동 기간이 명시되지 않음"],
+            ["팀 구성", "팀원 4인 + 튜터 2인 (내일배움캠프 3조 ‘3분 카레’)"],
+            ["나의 역할", "데이터 분석 · HVAC 부하 정량화 · Streamlit EV HUD 대시보드 개발"],
+            ["분석 도구", "Pandas · NumPy · scikit-learn(Random Forest) · Streamlit · Plotly · Altair · Matplotlib / Seaborn"],
+            ["데이터", "여름 TripA 467,701행 + 겨울 TripB 627,092행 · 결측 없음 — 속도 · 배터리 전압 / 전류 / 온도 · SoC · 회생제동 신호 · HVAC(히터 · 에어컨)"]
+          ],
+          stats: [
+            ["1,094,793행", "직접 적재·정제한 센서 로그", "여름 TripA 467,701행 + 겨울 TripB 627,092행 · 전류 음수 370,475건은 이상이 아니라 방전 구간"],
+            ["18.8 kWh", "실제 사용 가능 용량", "공칭 21.6 kWh 중 격자 구조 보호 마진 제외 — Display SoC 100% = 실제 SoC 86–87%"],
+            ["−3.99 Wh", "에어컨 순수 평균 소모 전력", "기본 시스템 −2.89 Wh, 에어컨 동작 시 −6.88 Wh (전체 트립 기준)"],
+            ["0.228", "Velocity 변수 중요도", "주행저항 0.216 · HVAC 0.190 · 가속도 0.188 순 (Random Forest)"]
+          ],
+          background: [
+            "전기차 시장에서 에너지 효율과 배터리 성능, 안전성은 핵심 경쟁 요인입니다. 시제품 주행 테스트에서 수집한 주행 · 배터리 · HVAC(난방 / 에어컨) 센서 데이터를 활용해 안전성과 품질 혁신을 도모하는 것이 출발점이었습니다.",
+            "과제는 세 가지였습니다 — 주요 KPI(소비 전력, 회생 제동 비중 등) 시각화, 잔여 주행거리(Range) 예측 및 배터리 잔량 계산, 그리고 전력 소모의 주요 부하 원인 파악. 여기서 얻은 인사이트를 대시보드로 연결해 사용자의 의사결정을 지원하는 것이 최종 목표였습니다."
+          ],
+          problems: [
+            ["이 값들은 이상치인가?", "Boxplot에는 이상치처럼 보이는 값이 많았습니다. 속도 · 전압 · 전류의 급격 변화 상위 1%가 각각 4,677 / 4,674 / 4,677건이었지만, 순간 가속(고부하) 시 전류가 오르고 내부저항과 전압강하가 커지며 전압이 일시적으로 떨어지는 것은 물리적으로 타당한 거동이라 이상치로 보지 않았습니다."],
+            ["전류의 부호", "Battery Current의 음수 370,475건은 방전, 양수는 충전을 의미합니다. 부호 규약이 데이터마다 다를 수 있어 대시보드에서는 회생 구간 표본의 음수 비율로 극성을 자동 추론하도록 만들었습니다."],
+            ["파생 변수가 필요했다", "센서 원본만으로는 ‘얼마나 효율적으로 달렸는가’를 알 수 없어, 전력 · 에너지 · 거리 · 주행 저항 · 실제 구동 파워를 직접 계산해 붙였습니다."],
+            ["깨진 컬럼명", "‘캜’로 깨진 문자를 ‘℃’로 복구하고, 괄호 표기를 수정하고, 불필요한 Unnamed 컬럼을 제거하는 정제부터 시작했습니다."]
+          ],
+          role: {
+            who: "데이터 분석 · HVAC 부하 정량화 · 대시보드 개발",
+            groups: [
+              {
+                label: "데이터 분석 — project.ipynb",
+                items: [
+                  "32개 트립 CSV를 하나로 합쳐 467,701행을 만들고, 깨진 컬럼명(캜 → ℃)과 불필요한 컬럼을 정제한 뒤 0.1초 로그를 5초(50행) 윈도우로 잘라 구간 평균 가속도 · 속도 · 전력과 SoC 변화량을 짝지었습니다.",
+                  "가속도와 SoC 감소의 Spearman 상관이 ρ = 0.614 (p < 0.0001)로 유의했지만, TripA06 한 트립만 ρ = −0.031 (p = 0.44)로 상관이 사라지는 것을 발견했습니다.",
+                  "원인을 ‘HVAC 과부하’와 ‘회생제동 비율 부족’ 두 가설로 좁혀 검증했습니다. TripA06의 평균 HVAC 전력은 5.95 kW로 나머지 트립(0.14–2.0 kW)을 압도했고, 회생제동 비율은 0.036으로 다른 트립(0.068)의 절반이었습니다. 평균 속도와 가감속 횟수가 더 많은데도 전비는 −118.5 Wh/km로 가장 좋아, 가감속 효과가 HVAC 부하에 묻힌 트립이라고 결론지었습니다.",
+                  "회생제동 신호가 1인 구간만 남겨 배터리 전류를 다시 그려본 결과, 실제 충전 전류가 흐른 비율은 93.87%였고 신호가 1인데도 방전인 포인트가 1,892개 있었습니다. 이 신호가 ‘회생제동이 일어났다’가 아니라 ‘회생제동 제어를 켰다’를 뜻한다고 해석했습니다.",
+                  "60초 rolling으로 과거 구간의 효율 · 속도 · 가속도 · HVAC 전력 · 회생 비율 · SoC 강하를 피처로 만들고, VIF로 다중공선성을 확인(전부 2.4 이하)한 뒤 이후 구간을 예측했습니다.",
+                  "효율(Wh/km)을 직접 예측했을 때는 R² −0.70으로 기준 모델보다 못했습니다. 타깃을 ‘이후 구간의 주행 거리’로 바꾸자 Random Forest R² 0.960 / XGBoost R² 0.962가 나왔고, 트립 단위로 train · test를 분리해 데이터 누수를 차단한 뒤에도 0.954 / 0.959로 유지됐습니다. XGBoost에는 과소추정에 2배 가중을 주는 비대칭 손실 함수를 직접 구현해 학습시켰습니다."
+                ]
+              },
+              {
+                label: "HVAC 부하 정량화 — calcul.ipynb / calcul_B.ipynb",
+                items: [
+                  "여름(TripA)과 겨울(TripB) 데이터를 따로 적재해 0.1초 간격의 히터 · 에어컨 · 배터리 전력을 각각 Wh로 적분하고, 트립별 누적 에너지를 구했습니다. 히터 전력은 데이터셋마다 컬럼 구성이 달라 TripA는 Heating Power CAN + LIN을, TripB는 Heater 전압 × 전류를 써서 복원했습니다.",
+                  "전체 배터리 소비 에너지 대비 공조 에너지의 비율로 주행거리 보정 계수를 산출했습니다 — 에어컨 141.99 / 2,254.25 Wh = 6.3%, 히터 753.33 / 3,011.04 Wh = 25.0%. 계절별로 한쪽 부하만 유의미하게 잡히므로 여름 데이터에서 에어컨, 겨울 데이터에서 히터 계수를 뽑았습니다.",
+                  "이 두 계수를 대시보드의 잔여 주행거리 보정에 그대로 연결해, 히터 · 에어컨 작동 여부에 따라 표시 거리가 달라지도록 했습니다."
+                ]
+              },
+              {
+                label: "대시보드 개발 — app.py",
+                items: [
+                  "배터리 게이지 · 속도계 · 전력 바를 HTML/CSS로 직접 그리고, 프레임 슬라이더와 FPS · 재생 · 루프 컨트롤로 주행 로그를 영상처럼 재생할 수 있게 만들었습니다.",
+                  "센서 컬럼명이 파일마다 달라, 정규식 기반 별칭 매핑(ALIASES)으로 Time · Velocity · SoC · Voltage · Current · Regen · HVAC 컬럼을 자동 인식하도록 했습니다. 실내 · 외 온도는 중복 매칭을 막는 별도 유틸로 유일하게 매핑했습니다.",
+                  "전류 극성을 회생 구간 표본에서 자동 추론(infer_polarity)하고, 수동 반전 옵션도 함께 두었습니다.",
+                  "속도 0.8 km/h, 회생 1.0 A, 충전 1.5 A의 임계값으로 정차 · 충전 / 주행 · 회생 / 주행 중 상태를 구분해 배지로 표시했습니다.",
+                  "Power details 서브페이지 — 히터 · 에어컨 · 주행저항 · 실주행으로 나눈 현재 전력 분포, 현재 / 평균 / 피크 전력, 그리고 누적 방전 · 회생 · Net 에너지를 거리축에 올린 History 그래프를 만들었습니다. Net 곡선의 기울기가 곧 Wh/km입니다.",
+                  "Regen 서브페이지 — 현재 프레임 기준 최근 10분 창의 회생 전력을 면적 그래프로 그리고, 시간으로 적분해 회수 에너지(kWh)를 표시했습니다."
+                ]
+              }
+            ]
+          },
+          flow: [
+            ["01", "데이터 탐색", "기초 통계량, 결측 · 음수 확인, 변수별 연속성 점검"],
+            ["02", "Feature Engineering", "전력 · 에너지 · 거리 · 효율 · 주행 저항 · 실구동 파워 파생"],
+            ["03", "관계 분석", "속도 · 가속도 ↔ 전력량, 회생제동 기여도, HVAC 부하 분리"],
+            ["04", "주행거리 계산", "사용 가능 전력 용량 ÷ 주행 효율로 잔여 거리 산출"],
+            ["05", "대시보드", "Streamlit HUD · Power details · Regen 서브페이지 구현"]
+          ],
+          prep: {
+            head: ["파생 변수", "계산식", "전제와 판단"],
+            rows: [
+              ["Power [W]", "Voltage [V] × Current [A]", "부호가 그대로 충·방전 방향을 의미"],
+              ["Electrical Energy [Wh]", "Power [W] × Time [hr]", "시간 차분마다 비선형으로 변해 cumulative로 누적"],
+              ["Distance [km]", "Velocity [km/h] × Time [hr]", "시간 차분으로 계산 후 누적"],
+              ["Energy Efficiency [Wh/km]", "누적 에너지 ÷ 누적 거리", "Net 에너지 곡선의 기울기와 동일한 값"],
+              ["Force [N]", "Mass [kg] × acceleration [m/s²]", "차량 중량 1,360 kgf, 가속도는 종가속도로 가정"],
+              ["Actual Driving Power [W]", "Energy [J] ÷ Time [s]", "Energy = Force × Distance"],
+              ["Resistive Force [N]", "a + b·V + c·V²", "국내외 시험 경험식. BMW i3 계수 a = 104.9, b = 1.32, c = 0.01043. 등판 저항은 상수 a에 반영된 것으로 가정"]
+            ]
+          },
+          extra: {
+            title: "기초 통계량 — 467,701행",
+            caption: "전류의 최솟값 −395.18 A는 강한 방전, 최댓값 143.53 A는 회생·충전 구간입니다. 배터리 온도는 16–32 ℃ 범위로 안정적이었고, 변화 폭도 2–5 ℃ 이내였습니다.",
+            head: ["센서", "평균", "표준편차", "최소", "25%", "중앙값", "75%", "최대"],
+            rows: [
+              ["Battery Voltage [V]", "382.86", "6.60", "349.41", "379.71", "384.16", "387.61", "394.76"],
+              ["Battery Current [A]", "−15.41", "36.54", "−395.18", "−25.70", "−8.68", "−1.13", "143.53"],
+              ["Velocity [km/h]", "43.27", "32.95", "0.00", "18.09", "39.03", "63.05", "151.59"],
+              ["Battery Temperature [℃]", "22.36", "3.85", "16.00", "19.00", "22.00", "26.00", "32.00"],
+              ["SoC [%]", "72.90", "10.19", "34.20", "66.80", "74.10", "80.90", "88.50"]
+            ]
+          },
+          figures: [
+            ["fig-ev-trip.jpg", "Trip 단위 시계열. 속도 · 전류 · 실구동 파워를 배터리 온도와 겹쳐 봤습니다.", "결과보고서 p.6"],
+            ["fig-ev-accel.jpg", "가속도 구간별 실제 구동 파워와 주행 저항 파워. 저항은 완만한데 구동 파워만 가파르게 올라갑니다.", "결과보고서 p.15"],
+            ["fig-ev-soc.jpg", "SoC와 속도의 시계열. 감속 구간에서 SoC가 잠깐 회복되는 회생제동이 보입니다.", "결과보고서 p.16"],
+            ["fig-ev-imp.jpg", "Random Forest 변수 중요도. Velocity 0.228, 주행저항 0.216, HVAC 0.190 순입니다.", "결과보고서 p.17"],
+            ["fig-ev-aircon.jpg", "전체 트립 기준 에어컨 전력 소모. 기본 −2.89 Wh, 에어컨 동작 시 −6.88 Wh, 순수 에어컨 −3.99 Wh.", "결과보고서 p.21"],
+            ["fig-ev-dash-main.jpg", "직접 구현한 HUD 메인 화면. 배터리 게이지 · 속도계 · 예상 주행거리 · 효율을 한눈에 배치했습니다.", "결과보고서 p.24"],
+            ["fig-ev-dash-flow.jpg", "Power details > Flow. 현재 · 평균 · 피크 전력과 전력 분포를 함께 보여줍니다.", "결과보고서 p.25"],
+            ["fig-ev-dash-regen.jpg", "Regen 서브페이지. 최근 10분 회생 전력 면적 그래프와 적분한 회수 에너지.", "결과보고서 p.26"]
+          ],
+          findings: [
+            ["에너지는 속도와 가속도 양쪽에, 저항은 속도에만", "주행에 필요한 에너지는 속도와 가속도 모두에 비례하지만, 주행 저항은 속력에만 비례합니다. 그래서 급가속 구간에서 구동 파워만 가파르게 치솟는 형태가 나타납니다."],
+            ["가속도가 SoC를 깎는다", "가속도가 커질수록 SoC 감소가 커졌고, 반대로 감속 과정에서는 회생제동으로 SoC가 충전되는 현상도 함께 확인됐습니다."],
+            ["SoC 급락 집단의 정체", "SoC 급락 구간이 나타나는 집단은 높은 속도 분포와 더 큰 방전량 분포를 가졌습니다. 주요 변수는 속력 · 주행 저항 · HVAC · 급가속/감속이었습니다."],
+            ["회생제동은 항상 쓰이지 않는다", "SoC가 높을수록 회생제동 비중이 줄어듭니다 — 과충전에 의한 배터리 열 폭주를 방지하기 위해서입니다. 급감속 시에도 회생 비중이 줄어드는데, 긴급 제동에는 유압 브레이크가 더 효과적이기 때문입니다."],
+            ["에어컨은 주행과 무관하게 소모된다", "가속도가 증가해도 평균 에어컨 전력 소모는 증가하지 않고, 실내·외 온도와 설정 온도에만 반응했습니다. 덕분에 정차 중 소모량으로 주행 중 소모량을 가정할 수 있었습니다."],
+            ["에어컨 부하의 크기", "전체 트립 기준 기본 시스템 −2.89 Wh, 에어컨 포함 −6.88 Wh, 순수 에어컨 −3.99 Wh. 에어컨 on/off가 변하는 트립만 보면 −3.16 / −7.66 / −4.50 Wh로 비슷한 비율이 유지됐습니다."],
+            ["잔여 주행거리 계산식", "사용 가능 전력 용량[Wh] = Display SoC(%) × 18,800Wh, 남은 주행 가능 거리[km] = 사용 가능 전력 용량 ÷ 주행 효율[Wh/km]. 공칭 21.6 kWh 중 18.8 kWh만 쓰는 이유는 배터리 격자 구조 보호를 위한 안전 마진 때문입니다."],
+            ["예측값보다 흐름을 보여주기", "주행거리 하나만 숫자로 던지는 대신, 그 숫자가 나온 센서 흐름(속도 · SoC · 전력 · 회생)을 함께 재생해 볼 수 있도록 대시보드를 구성했습니다."]
+          ],
+          outcome: [
+            ["산출물", "주행 상태와 배터리 SoC · 온도 · 전력, 회생 제동 에너지를 프레임 단위로 재생하며 확인할 수 있는 인터랙티브 HUD 대시보드를 구현했습니다."],
+            ["한계", "데이터 특성상 머신러닝 모델로 예측하기 어려웠고, 급가속이나 강한 회생제동 구간의 표본이 부족해 샘플 불균형이 발생했습니다. 서브페이지에서는 그래프 화면이 깜빡이는 플리커 현상도 있었습니다."],
+            ["다음에 한다면", "트랜스포머 기반 딥러닝 모델로 예측을 다시 시도하고, 부족한 구간의 데이터를 의도적으로 보강하고 싶습니다. 플리커는 자동 리스케일을 막고 프레임을 조절해 해결할 수 있습니다."]
+          ]
         }
       };
-      const figures = {
-        radar: [
-          { src: "assets/radar-01.jpg", alt: "레이더 신호 그래픽", caption: "보고서 내 레이더 신호 시각 자료" },
-          { label: "문제 정의", text: "센서 성능 저하를 조기에 파악하는 분석 목표 설정" },
-          { label: "데이터 이해", text: "레이더 센서의 측정값과 변화 특성 점검" },
-          { label: "개선 방향", text: "예측 결과를 품질 관리 관점으로 정리" }
-        ],
-        engine: [
-          { src: "assets/engine-01.jpg", alt: "엔진 작동 원리 그림", caption: "엔진 작동 구조 및 사이클" },
-          { src: "assets/engine-02.jpg", alt: "엔진 이미지", caption: "분석 대상 엔진 구성" },
-          { src: "assets/engine-03.jpg", alt: "엔진 속도에 따른 토크와 출력 그래프", caption: "엔진 속도별 토크·출력 성능 곡선" },
-          { src: "assets/engine-04.jpg", alt: "엔진 관련 보고서 시각 자료", caption: "보고서 내 엔진 성능 분석 자료" }
-        ],
-        wafer: [
-          { src: "assets/wafer-01.jpg", alt: "날짜별 결함률 관리도", caption: "날짜별 결함률 관리도" },
-          { src: "assets/wafer-02.jpg", alt: "공정별 결함 수와 변수의 상관관계 히트맵", caption: "공정별 변수–결함 수 상관관계" },
-          { src: "assets/wafer-03.jpg", alt: "시간대별 결함 발생 비율 그래프", caption: "시간대별 결함 발생 비율" },
-          { src: "assets/wafer-04.jpg", alt: "웨이퍼 결함 분석 시각 자료", caption: "보고서 내 공정·결함 비교 자료" }
-        ],
-        coating: [
-          { src: "assets/coating-small-01.jpg", alt: "도장 표면 불량 예시", caption: "도장 표면 불량 사례" },
-          { src: "assets/coating-small-03.jpg", alt: "도막 벌어짐 불량 예시 이미지", caption: "도막 벌어짐 불량 유형" },
-          { src: "assets/coating-small-04.jpg", alt: "스크래치 불량 예시 이미지", caption: "스크래치 불량 유형" },
-          { src: "assets/coating-small-05.jpg", alt: "도장 표면 스크래치 이미지", caption: "도장 표면 결함 사례" }
-        ],
-        ev: [
-          { src: "assets/ev-01.jpg", alt: "전기차 주행 및 배터리 상태 대시보드", caption: "주행 상태와 예상 주행거리" },
-          { src: "assets/ev-02.jpg", alt: "전기차 배터리 상태 대시보드", caption: "배터리 SoC·전력 상태 확인" },
-          { src: "assets/ev-03.jpg", alt: "전기차 주행 데이터 대시보드", caption: "센서값 기반 주행 상태 화면" },
-          { label: "신호 통합", text: "속도·SoC·전압·전류·온도를 함께 해석해 상태를 표시" }
-        ]
-      };
-      const id = new URLSearchParams(location.search).get("id") || "radar";
-      const p = projects[id] || projects.radar;
+
+      /* ---------------- render ---------------- */
+      const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      const qid = new URLSearchParams(location.search).get("id");
+      const id = ORDER.includes(qid) ? qid : ORDER[0];
+      const i = ORDER.indexOf(id);
+      const p = P[id];
+
       document.title = `${p.title} | Portfolio`;
-      for (const [key, value] of Object.entries(p)) { const el = document.getElementById(key); if (el && typeof value === "string") el.textContent = value; }
-      document.getElementById("flow").innerHTML = p.flow.map(([title, text], i) => `<div><b>0${i + 1} · ${title}</b><span>${text}</span></div>`).join("");
-      document.getElementById("outcome").innerHTML = p.outcome.map(([title, text]) => `<div><b>${title}</b><p>${text}</p></div>`).join("");
-    </script>
-    <script>
-      const projectFigures = figures[id] || figures.radar;
-      document.getElementById("figures").innerHTML = projectFigures.map((figure) => {
-        if (figure.src) return `<figure class="figure-card"><img src="${figure.src}" alt="${figure.alt}"><figcaption>${figure.caption}</figcaption></figure>`;
-        return `<div class="process-frame"><b>${figure.label}</b><span>${figure.text}</span></div>`;
-      }).join("");
+      document.getElementById("now").textContent = p.title;
+      document.getElementById("dots").innerHTML = ORDER
+        .map((k, n) => `<a href="?id=${k}" title="${esc(P[k].title)}"${k === id ? ' aria-current="page"' : ""}>${n + 1}</a>`)
+        .join("");
+
+      let s = 0;
+      const head = (t, aside) =>
+        `<div class="sec-head"><span class="num">${String(++s).padStart(2, "0")}</span><h2>${t}</h2>${aside ? `<span class="aside">${aside}</span>` : ""}</div>`;
+      const table = (t) =>
+        `<div class="tbl-wrap"><table>${t.caption ? `<caption>${esc(t.caption)}</caption>` : ""}` +
+        `<thead><tr>${t.head.map((h, n) => `<th${n ? ' class="num"' : ""}>${esc(h)}</th>`).join("")}</tr></thead><tbody>` +
+        t.rows.map((r) => `<tr><th>${esc(r[0])}</th>${r.slice(1).map((c) => `<td class="num">${esc(c)}</td>`).join("")}</tr>`).join("") +
+        `</tbody></table></div>`;
+
+      const html = [
+        `<section class="hero">
+          <p class="eyebrow"><span>Project ${String(i + 1).padStart(2, "0")} / ${String(ORDER.length).padStart(2, "0")}</span><span class="tag">${esc(p.code)}</span></p>
+          <h1>${esc(p.title)}</h1>
+          <p class="lede">${esc(p.lede)}</p>
+          <dl class="meta">${p.meta.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>
+          <div class="stats">${p.stats.map(([b, l, sub]) => `<div><b>${esc(b)}</b><div class="lbl">${esc(l)}</div><div class="sub">${esc(sub)}</div></div>`).join("")}</div>
+        </section>`,
+
+        `<section class="sec">${head("배경과 문제 정의")}
+          <div class="prose">${p.background.map((t) => `<p>${esc(t)}</p>`).join("")}</div>
+          <ul class="points">${p.problems.map(([t, d]) => `<li><b>${esc(t)}</b><span>${esc(d)}</span></li>`).join("")}</ul>
+        </section>`,
+
+        `<section class="sec">${head("나의 역할")}
+          <div class="role${p.role.groups ? " deep" : ""}">
+            <div class="who"><span>Personal Contribution</span><b>${esc(p.role.who)}</b></div>
+            ${p.role.groups
+              ? `<div class="role-body">${p.role.groups.map((g) => `<p class="role-grp">${esc(g.label)}</p><ul>${g.items.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>`).join("")}</div>`
+              : `<ul>${p.role.items.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>`}
+          </div>
+        </section>`,
+
+        `<section class="sec">${head("수행 절차")}
+          <div class="flow">${p.flow.map(([w, t, d]) => `<div><div class="when">${esc(w)}</div><b>${esc(t)}</b><span>${esc(d)}</span></div>`).join("")}</div>
+        </section>`,
+
+        `<section class="sec">${head(id === "ev" ? "Feature Engineering" : "데이터와 전처리", esc(p.prep.head.join(" → ")))}
+          ${table(p.prep)}
+        </section>`,
+
+        `<section class="sec">${head("분석 과정", "이미지를 클릭하면 크게 볼 수 있습니다")}
+          <div class="figs">${p.figures.map(([src, cap, from]) =>
+            `<figure><img src="assets/${src}" alt="${esc(cap)}" data-cap="${esc(cap)}" loading="lazy" /><figcaption>${esc(cap)}<em>${esc(from)}</em></figcaption></figure>`
+          ).join("")}</div>
+        </section>`,
+
+        `<section class="sec">${head("핵심 결과")}
+          <ol class="finds">${p.findings.map(([t, d]) => `<li><b>${esc(t)}</b><span>${esc(d)}</span></li>`).join("")}</ol>
+        </section>`,
+
+        `<section class="sec">${head(p.extra.title)}
+          ${table(p.extra)}
+        </section>`,
+
+        `<section class="sec">${head("결론과 회고")}
+          <div class="out">${p.outcome.map(([t, d]) => `<div><b>${esc(t)}</b><p>${esc(d)}</p></div>`).join("")}</div>
+        </section>`,
+
+        `<nav class="pager">
+          ${i > 0
+            ? `<a class="prev" href="?id=${ORDER[i - 1]}"><span>← Previous</span><b>${esc(P[ORDER[i - 1]].title)}</b></a>`
+            : `<a class="prev empty" href="#"><span>← Previous</span><b>—</b></a>`}
+          ${i < ORDER.length - 1
+            ? `<a class="next" href="?id=${ORDER[i + 1]}"><span>Next →</span><b>${esc(P[ORDER[i + 1]].title)}</b></a>`
+            : `<a class="next empty" href="#"><span>Next →</span><b>—</b></a>`}
+        </nav>`
+      ].join("");
+
+      document.getElementById("main").innerHTML = html;
+
+      /* ---------------- lightbox ---------------- */
+      const lb = document.getElementById("lb");
+      const lbImg = lb.querySelector("img");
+      const lbCap = lb.querySelector("p");
+      document.getElementById("main").addEventListener("click", (e) => {
+        const img = e.target.closest("figure img");
+        if (!img) return;
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbCap.textContent = img.dataset.cap || "";
+        lb.hidden = false;
+        lb.classList.add("on");
+      });
+      const close = () => { lb.classList.remove("on"); lb.hidden = true; lbImg.src = ""; };
+      lb.addEventListener("click", close);
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
     </script>
   </body>
 </html>
